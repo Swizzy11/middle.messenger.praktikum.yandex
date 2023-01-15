@@ -6,7 +6,7 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
  > > start server : ```npm run start```
  > > build : ```npm run build```
 
- Deployed: [Netlify]()
+ Deployed: [Netlify](https://friendly-crostata-7f9332.netlify.app)
 
  Project description:
  Проект находится на стадии разработки. 
