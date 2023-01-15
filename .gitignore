@@ -1,0 +1,7 @@
+.vscode
+.module-cache
+
+/node_modules
+*.lock
+/.parcel-cache
+dist/
