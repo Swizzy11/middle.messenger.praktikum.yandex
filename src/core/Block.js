@@ -91,9 +91,12 @@ export default class Block {
   
   _render() {
     const block = this.render();
+  
     this._removeEvents()
     this._element.innerHTML = block;
+    
     this._addEvents();
+    debugger;
   }
   
   render() {}
