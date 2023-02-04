@@ -97,6 +97,10 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 }
 .chat {
     height: 90%;
+    overflow:scroll;
+    overflow-x:hidden;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0 0% 50%);
 }
 
 #form_message {
@@ -122,6 +126,9 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     margin-left: 1vw;
     border: none;
     background-color:white;
+    background-image: url("../static/icons/arrow-bar-up.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 .btn_send {
     width: 4%;
@@ -129,6 +136,10 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     margin-left: 3%;
     border-radius: 15px;
     background-color: #ffa33a;
+    background-image: url("../static/icons/arrow-up-left.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 } 
 
 .feed_block {
@@ -153,14 +164,14 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     justify-content: space-between;
 }
 
-#btn_profile {
+.btn_profile {
     cursor: pointer;
     background-color: $bg-color-zero;
     border: none;
     text-decoration: underline;
     font-size: $font-size-small;
 }
-#btn_logout {
+.btn_logout {
     cursor: pointer;
     background-color: $bg-color-zero;
     border: none;
