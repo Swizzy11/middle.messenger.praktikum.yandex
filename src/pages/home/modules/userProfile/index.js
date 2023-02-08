@@ -1,21 +1,19 @@
-import Handlebars from "handlebars";
-import tpl from 'bundle-text:./index.hbs';
+
+import tpl from './index.hbs';
 import Block from "../../../../core/Block";
 import { Button } from "../../../../components/button";
 export default class UserProfile extends Block {
     constructor(props) {
-        const buttonEdit = new Button({
-            className: "btn btn_edit",
-            child: `Редактировать...`,
-            type: "button"
-        }).render();
-        
-        super("userProfile",{
-            ...props, buttonEdit
-        });
-        
+        super("div", props);
     }
     render() {
-        return Handlebars.compile(tpl)(this.props)
+        return this.compile(tpl,{
+            buttonEdit: this.props.buttonEdit,
+            userName: this.props.userName,
+            userSurname: this.props.userSurname,
+            email: this.props.email,
+            password: this.props.password,
+            phone: this.props.phone,
+        })
     }
 }

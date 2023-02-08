@@ -2,15 +2,15 @@
 <div class="messager_home_page">     
    <div class="message_body">
     <div class="header_message">
-           <p><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+           <p><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg></p>
-           <p class="user_name_avatar">{{name}}</p>
+            {{{userName}}}
    </div>
    <hr style="width: 95%;margin: auto ;opacity: .3;">
        <div class="chat">
-      
+        {{{message1}}}
        </div>
        <hr style="width: 95%;margin: auto ; opacity: .3;">
        <form action="" method="post" target="_blank" id="form_message">
@@ -29,11 +29,15 @@
        <form action="" method="post" target="_blank" > 
                 {{{inputSearch}}}   
        </form>
+       
    </div>
+   <hr style="width: 95%;margin: auto ; opacity: .3;">
 </div>
 <div class="feed_body">
-   
+   {{{firstPeople}}}
 </div>
 </div>
 </div>
 </div>
+
+

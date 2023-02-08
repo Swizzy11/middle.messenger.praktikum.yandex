@@ -1,27 +1,19 @@
-import Handlebars from "handlebars";
-import tpl from 'bundle-text:./index.hbs';
+
+import tpl from './index.hbs';
 import { Input } from "../../../../components/input";
 import Block from "../../../../core/Block";
 
 export default class Login extends Block {
-    constructor(props) {
- 
-        const login = new Input({
-            type: "email",
-            name: "login",
-            class: "input_common",
-        }).render();
-        const password = new Input({
-            type: "password",
-            name: "password",
-            class: "input_common",
-        }).render();
-        super("login",{
-            ...props, login, password
-        });
+    constructor(props) { 
+        super("div", props);
         
     }
     render() {
-        return Handlebars.compile(tpl)(this.props)
+        return this.compile(tpl,{
+            login: this.props.login,
+            password: this.props.password,
+            buttonEnter: this.props.buttonEnter,
+            buttonNoAccount: this.props.buttonNoAccount,
+        })
     }
 }

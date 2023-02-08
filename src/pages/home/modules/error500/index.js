@@ -1,15 +1,14 @@
-import Handlebars from "handlebars";
-import tpl from 'bundle-text:./index.hbs';
+import tpl from './index.hbs';
 import Block from "../../../../core/Block";
 
 export default class Error500 extends Block {
     constructor(props) {
-        super("error500",{
-            ...props
-        });
+        super("div",props);
         
     }
     render() {
-        return Handlebars.compile(tpl)(this.props)
+        return this.compile(tpl,{
+            buttonBack: this.props.buttonBack
+        })
     }
 }
