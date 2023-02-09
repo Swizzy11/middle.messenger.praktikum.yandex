@@ -1,8 +1,15 @@
 import tpl from './index.hbs';
 import Block from "../../../../core/Block";
 
-export default class Error500 extends Block {
-    constructor(props) {
+import { IButton } from '../../../../components/button/Button';
+
+type PropsType = {
+    buttonBack: Block<IButton>,
+}
+
+
+export default class Error500 extends Block<PropsType> {
+    constructor(props:PropsType) {
         super("div",props);
         
     }

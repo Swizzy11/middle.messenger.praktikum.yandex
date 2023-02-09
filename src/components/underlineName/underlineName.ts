@@ -2,9 +2,7 @@ import Block from "../../core/Block";
 import tmp from "./tmp.hbs";
 
 export interface IUnderline {
-  [key: string]:string | {
-    [key: string]:string
-  }
+  text: string;
 }
 
 export default class UnderlineName extends Block<IUnderline> {

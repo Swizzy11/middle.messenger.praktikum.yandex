@@ -10,7 +10,7 @@ function buttonValidator() {
     validator("second_name");
 
 if(validator("email") === true
-&& validator("login")
+&& validator("login") === true
 && validator("password") === true 
 && validator("phone") === true 
 && validator("first_name") === true

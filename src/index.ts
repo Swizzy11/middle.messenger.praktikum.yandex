@@ -31,9 +31,13 @@ function indexPage() {
                         className: "btn_profile",
                         child:"profile",
                         events: {
-                                click: () =>  {
-                                        document.getElementById("root").innerHTML = "";
-                                        userProfilePage()
+                                click: () => {
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
+                                                userProfilePage()
+                                        }
+                                        
                                 }
                         }
                     }),
@@ -43,8 +47,11 @@ function indexPage() {
                         child:"logout",
                         events: {
                                 click: () => {
-                                        document.getElementById("root").innerHTML = "";
-                                        registrationPage();
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
+                                                registrationPage();
+                                        }
                                 }
                         }
                     }),
@@ -69,7 +76,10 @@ function indexPage() {
                                 click: (e) => {
                                         e.preventDefault()
                                         if(validator("input_message") === true){    
-                                                console.log(document.querySelector(".input_message").value)
+                                                const elem = <HTMLInputElement>document.querySelector(".input_message")
+                                                if(elem) {
+                                                        console.log(elem.value)
+                                                }
                                         }
                                 }
                         }
@@ -139,11 +149,14 @@ function loginPage() {
                                         validator("password");
                                         if(validator("login") === true 
                                         && validator("password") === true) {
-                                                document.querySelectorAll("form input").forEach((e)=>{
+                                                document.querySelectorAll("form input").forEach((e: HTMLInputElement)=>{
                                                         obj[e.name] = e.value;
+                                                        
                                                 })
                                         }
-                                        console.log(obj);
+                                        if(Object.keys(obj).length !== 0) { 
+                                                console.log(obj)
+                                            }
                                 }
                         }
                 }),
@@ -153,8 +166,11 @@ function loginPage() {
                         type:"button",
                         events: {
                                 click: () => {
-                                        document.getElementById("root").innerHTML = "";
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
                                         registrationPage()
+                                        }
                                 }
                         }
                 })
@@ -176,6 +192,9 @@ function userProfilePage() {
                 login: new UnderlineName({
                         text:"kotovskij.01"
                 }),
+                nameInChat:new UnderlineName({
+                        text:"Dmitrich"
+                }),
                 password: new UnderlineName({
                         text:"&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 }),
@@ -188,8 +207,11 @@ function userProfilePage() {
                         type: "button",
                         events: {
                                 click: () => {
-                                        document.getElementById("root").innerHTML = "";
-                                        editProfilePage();
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
+                                                editProfilePage();
+                                        }
                                 }
                         }
                     }),
@@ -240,6 +262,11 @@ function editProfilePage() {
                                         validator("login")
                                 }
                         }
+                    }),
+                nameInChat: new Input({
+                        type: "text",
+                        name: "display_name",
+                        class: "input_form display_name",
                     }),
                 password: new Input({
                         type: "password",
@@ -365,8 +392,11 @@ function registrationPage() {
                         placeholder: "Напишите сообщение...",
                         events: {
                                 click: () => {
-                                        document.getElementById("root").innerHTML = "";
-                                        loginPage();
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
+                                                loginPage();
+                                        }
                                 }
                         }
                     }),
@@ -383,8 +413,11 @@ function error404Page() {
                         child: "Вернуться на главную?",
                         events: {
                                 click: () => {
-                                        document.getElementById("root").innerHTML = ""
-                                        indexPage()
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
+                                                indexPage()
+                                        }
                                 }
                         }
                 })
@@ -399,8 +432,11 @@ function error500Page() {
                         child: "Вернуться на главную?",
                         events: {
                                 click: () => {
-                                        document.getElementById("root").innerHTML = ""
-                                        indexPage()
+                                        const elem = document.getElementById("root")
+                                        if (elem) {
+                                                elem.innerHTML = "";
+                                                indexPage()
+                                        }
                                 }
                         }
                 })
@@ -409,43 +445,71 @@ function error500Page() {
 }
 
 const homeBtn = document.getElementById('homeBtn')
-homeBtn.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = ""
-        return indexPage() ;
+homeBtn?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return indexPage() ;
+                }
+        
 })
 
 const edit_Profile = document.getElementById('edit_Profile')
-    edit_Profile.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = ""
-        return editProfilePage();
+    edit_Profile?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return editProfilePage();
+                }
+        
 })
 
 const profile = document.getElementById('profile')
-profile.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = ""
-        return userProfilePage();
+profile?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return userProfilePage();
+                }
+        
 })
 
 const loginIn = document.getElementById('loginIn')
-loginIn.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = "";
-        return loginPage();
+loginIn?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return loginPage();
+                }
+
 })
 
 const reg = document.getElementById('reg')
-reg.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = "";
-        return registrationPage();
+reg?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return registrationPage();
+                }
+
 })
 
 const err404 = document.getElementById('error_404')
-err404.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = ""
-        return error404Page();
+err404?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return error404Page();
+                }
+ 
 })
 
 const err500 = document.getElementById('error_500')
-err500.addEventListener("click", function(){
-        document.getElementById("root").innerHTML = ""
-        return error500Page();
+err500?.addEventListener("click", function(){
+        const elem = document.getElementById("root")
+                if (elem) {
+                        elem.innerHTML = "";
+                        return error500Page();
+                }
+
 })

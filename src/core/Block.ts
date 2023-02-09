@@ -11,7 +11,7 @@ type MetaType = {
     [key: string]: {[key: string]: string}},
 };
 
-type ElementType = {
+type ElementType = Node & {
     innerHTML: string;
     append: (value: DocumentFragment) => void;
     addEventListener: (value: string, value1:  string) => void;

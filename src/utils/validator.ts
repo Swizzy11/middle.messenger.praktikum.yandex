@@ -7,10 +7,10 @@ function validator(classes:string) {
     const messageReg = /^\s*$/;
 
 
-    const typeInput: any = document.querySelector(`.${classes}`)
+    const typeInput: HTMLInputElement | null = document.querySelector(`.${classes}`)
 
     if(classes === "email") {
-        if(emailReg.test(typeInput.value) === false){
+        if(emailReg.test(typeInput?.value ?? '') === false){
             const error = <HTMLElement>document.querySelector('.error_email');
             error.innerHTML = "Email должен содержать латиницу, может включать цифры и спецсимволы вроде дефиса, обязательно должна быть «собака» (@) и точка после неё, но перед точкой обязательно должны быть буквы!";
             return false;
@@ -21,7 +21,7 @@ function validator(classes:string) {
         }
     }
     if(classes === "password") {
-        if(passwordReg.test(typeInput.value) === false){
+        if(passwordReg.test(typeInput?.value ?? '') === false){
             const error = <HTMLElement>document.querySelector('.error_password');
             error.innerHTML = "Пароль должен содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра!";
             return false;
@@ -33,7 +33,7 @@ function validator(classes:string) {
     }
 
     if(classes === "phone") {
-        if(phoneReg.test(typeInput.value) === false){
+        if(phoneReg.test(typeInput?.value ?? '') === false){
             const error = <HTMLElement>document.querySelector('.error_phone');
             error.innerHTML = "Телефон должен содержать от 10 до 15 символов, состоит из цифр, может начинается с плюса!";
             return false;
@@ -45,7 +45,7 @@ function validator(classes:string) {
     }
 
     if(classes === "login") {
-        if(loginReg.test(typeInput.value) === false){
+        if(loginReg.test(typeInput?.value ?? '') === false){
             const error= <HTMLElement>document.querySelector('.error_login');
             error.innerHTML = "Логин должен содержать от 3 до 20 символов, латиницу, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание!";
             return false;
@@ -57,7 +57,7 @@ function validator(classes:string) {
     }
 
     if(classes === "first_name") {
-        if(nameReg.test(typeInput.value) === false){
+        if(nameReg.test(typeInput?.value ?? '') === false){
             const error = <HTMLElement>document.querySelector('.error_name');
             error.innerHTML = "Имя должно содержать Латиницу или кириллицу, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов!";
             return false;
@@ -69,7 +69,7 @@ function validator(classes:string) {
     }
 
     if(classes === "second_name") {
-        if(nameReg.test(typeInput.value) === false){
+        if(nameReg.test(typeInput?.value ?? '') === false){
             const error = <HTMLElement>document.querySelector('.error_surname') ;
             error.innerHTML = "Фамилия должна Латиницу или кириллицу, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов!";
             return false;
@@ -81,7 +81,7 @@ function validator(classes:string) {
     }
 
     if(classes === "input_message") {
-        if(messageReg.test(typeInput.value) === true){
+        if(messageReg.test(typeInput?.value ?? '') === true){
             const error = <HTMLElement>document.querySelector('.input_message') ;
             error.classList.add("error_outline");
             return false;

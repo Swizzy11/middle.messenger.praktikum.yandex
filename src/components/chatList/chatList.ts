@@ -2,9 +2,12 @@ import Block from "../../core/Block";
 import tmp from "./tmp.hbs";
 
 export interface IChatList {
-  [key: string]:string | {
-    [key: string]:string
-  }
+  you: string,
+  yourFriend: string,
+  messageForYou: string,
+  messageForPeople: string,
+  date1: string,
+  date2: string,
 }
 export default class ChatList extends Block<IChatList> {
     constructor(props:IChatList) {

@@ -5,6 +5,9 @@ const enum METHODS {
   DELETE = "DELETE"
 }
 
+
+type MethodType = (url: string, options: IOptions) => void
+
 function queryStringify(value: {[key:string]: string}) {
   if (typeof value !== "object") {
     throw new Error("Data must be object")
@@ -28,16 +31,16 @@ interface IOptions {
 }
 
 class HTTPTransport {
-  get = (url: string, options: IOptions = {}) => {
+  get: MethodType = (url, options = {}) => {
     return this.request(url, {...options, method: METHODS.GET}, options.timeout)
   }
-  post = (url: string, options: IOptions = {}) => {
+  post: MethodType = (url, options = {}) => {
   return this.request(url, {...options, method: METHODS.POST}, options.timeout)
   }
-  put = (url: string, options: IOptions = {}) => {
+  put: MethodType = (url, options = {}) => {
     return this.request(url, {...options, method: METHODS.PUT}, options.timeout)
   }
-  delete = (url: string, options: IOptions = {}) => { 
+  delete: MethodType = (url, options = {}) => { 
     return this.request(url, {...options, method: METHODS.DELETE}, options.timeout)
   }
 

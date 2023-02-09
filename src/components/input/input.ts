@@ -2,9 +2,13 @@ import tmp from "./tmp.hbs";
 import Block from "../../core/Block";
 
 export interface IInput {
-  [key: string]:string | {
-    [key: string]:string
-  }
+  type: string;
+  name: string;
+  class: string;
+  placeholder?: string;
+  events?: {
+    focusin: () => void
+}
 }
 
 export default class Input extends Block<IInput> {

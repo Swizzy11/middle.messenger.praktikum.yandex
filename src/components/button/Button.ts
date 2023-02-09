@@ -2,8 +2,13 @@ import Block from "../../core/Block";
 import tmp from "./tmp.hbs";
 
 export interface IButton {
-  [key: string]:string | {
-    [key: string]:string
+  type?: string;
+  name?: string;
+  className: string;
+  placeholder?: string;
+  child: string;
+  events: {
+    click: (e: any) => void;
   }
 }
 export default class Button extends Block<IButton> {
