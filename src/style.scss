@@ -1,0 +1,480 @@
+$primary-color:#ffa33a41;
+$font-size-small: small;
+$bg-color-zero:rgba(0, 0, 0, 0);
+
+#root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    padding: 0;
+    
+    font-family: CALIBRI;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+}
+.btn_close {
+    background-color: $bg-color-zero;
+    margin-left: 85%;
+}
+
+.input_common {
+    height: 3vh;
+    width: 15vw;
+    border-radius: 10px;
+    border:1px solid #c07a2b;
+    background-color: $primary-color;
+}
+
+.user_photo {
+    width: 5vw;
+    height: 8vh;
+    background-color: $primary-color;
+    border:1px solid #c07a2b;
+    border-radius: 6px;
+}
+
+
+
+/* menu */
+
+
+.nav {
+    visibility: hidden;
+    width: 8%;
+    height: 10%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 2% 2%;
+    right: 3%;
+    bottom: 40%;
+    padding-inline-start: 0;
+}
+.nav_hide {
+    visibility: visible;
+    opacity: 1;
+}
+.list_menu {
+    list-style-type: none;
+}
+
+
+
+/* block home */
+
+.block {
+    width: 98vw;
+    height: 98vh;
+}
+.messager_home_page {
+    width: 95%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+ 
+.header_message {
+    width: 100%;
+    height: 6%;
+    display: flex;
+}
+.message_body {
+    width: 100%;
+    height: 100%;
+}
+.chat {
+    height: 90%;
+}
+
+#form_message {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    justify-content: center;
+    width: 100%;
+    height: 6%;
+}
+
+.input_message {
+    width: 80%;
+    margin-left: 3%;
+    height: 40%;
+    border: 1px solid gray;
+    border-radius: 20rem;
+    background-color: $primary-color;
+}
+.btn_upload {
+    width: 3vw;
+    height: 40%;
+    margin-left: 1vw;
+    border: none;
+    background-color:white;
+}
+.btn_send {
+    width: 4%;
+    height: 40%;
+    margin-left: 3%;
+    border-radius: 15px;
+    background-color: #ffa33a;
+} 
+
+.feed_block {
+    display: flex;
+    flex-wrap: wrap;
+    width: 24%;
+    height: 100%;
+    border-left: 1px solid rgba(107, 107, 107, 0.3);
+}
+
+.feed_header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 10%;
+    margin-top: 10px;
+}
+
+
+.feed_block__header-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+#btn_profile {
+    cursor: pointer;
+    background-color: $bg-color-zero;
+    border: none;
+    text-decoration: underline;
+    font-size: $font-size-small;
+}
+#btn_logout {
+    cursor: pointer;
+    background-color: $bg-color-zero;
+    border: none;
+    text-decoration: underline;
+    font-size: $font-size-small;
+}
+.search_chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.input_search {
+    margin-top: 1vw;
+    width: 15vw;
+    height: 40%;
+    border: 1px solid gray;
+    border-radius: 20rem;
+    background-color: $primary-color;
+}
+
+.feed_body {
+    height: 90%;
+    width: 100%;
+}
+
+
+/* block edit profile */
+
+
+.block_edit_profile {
+    margin: 0;
+    padding: 0;
+    width: 50vw;
+    height: 90vh;
+    border: 1px solid rgba(92, 92, 92, 0.3);
+    border-radius: 1em;
+}
+.input_form {
+    margin-left: 4vw;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: $primary-color;
+    width: 20vw;
+    height: 40%;
+    border:1px solid #c07a2b;
+}
+.form_block {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    
+}
+.name_features {
+    font-size: large; 
+    margin-left: 20%;
+    width: 20%;
+    text-align: end;
+}
+.edit_profile_header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+.edit_profile_body {
+    width: 100%;
+    height: 60%;
+}
+.avatar {
+    background: url("../static/icons/avatar.png") no-repeat center;
+    background-size: 60px;
+    cursor: pointer;
+}
+.edit_profile_footer {
+    margin-top: 10vh;
+    margin-right: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end  
+}
+.btn_save {
+    font-size: $font-size-small;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #ffa33a;
+}
+
+
+/* block profile */
+
+
+.block_profile {
+    margin: 0;
+    padding: 0;
+    width: 45vw;
+    height: 90vh;
+    border: 1px solid rgba(92, 92, 92, 0.3);
+    border-radius: 1em;
+}
+.form {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    
+}
+.head_name {
+    font-size: large; 
+    margin-left: 20%;
+    width: 20%;
+    text-align: end;
+}
+
+.profile_header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+
+.profile_body {
+    width: 100%;
+    height: 60%;
+}
+.user_setting, 
+.user_photo {
+    margin-left: 3%;
+    text-decoration: underline;
+}
+.user_setting {
+    font-size: large;
+}
+.profile_footer {
+    margin-top: 10vh;
+    margin-right: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end  
+}
+.btn_edit {
+    font-size: medium;
+    text-decoration: underline;
+    background-color: $bg-color-zero;
+}
+
+
+/* block login */
+
+.block_authorization {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 150%;
+    height: 45%;
+    border: 1px solid rgba(92, 92, 92, 0.3);
+    border-radius: 1em;
+}
+.header_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.authorization_header {
+    width: 100%;
+    height: 15%; 
+}
+
+.authorization_body {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.authorization_footer {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;  
+}
+.btn_enter {
+    font-size: $font-size-small;
+    padding: 3%;
+    width: 30%;
+    border-radius: 15px;
+    background-color: #ffa33a;
+}
+.btn_no_account {
+    margin-top: 1%;
+    font-size: x-small;
+    background-color: $bg-color-zero;
+}
+
+/* block registration  */
+
+.block_registration {
+    margin: 0;
+    padding: 0;
+    width: 35vw;
+    height: 75vh;
+    border: 1px solid rgba(92, 92, 92, 0.3);
+    border-radius: 1em;
+}
+
+.registration_header {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+
+.registration_body {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.registration_footer {
+    margin-top: 8vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;  
+}
+.btn_registration {
+    margin-top: 2vh;
+    padding: 2%;
+    border-radius: 15px;
+    background-color: #ffa33a;
+    border:#c07a2b;
+    font-size:large;
+}
+.btn_has_account {
+    margin-top: 1vh;
+    font-size: x-small;
+    background-color: $bg-color-zero;
+}
+
+
+/* block error 404 */
+
+
+.error_description {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: x-large;
+}
+.error_type {
+    text-decoration: underline;
+    font-size: xx-large;
+}
+
+.back_404 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn_404 {
+    border: none;
+    background-color: $bg-color-zero;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+
+
+/* block error 500 */
+
+
+.error_description {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.error_type {
+    text-decoration: underline;
+    font-size: xx-large;
+}
+.go_back_500 {
+    font-size: x-large;
+}
+.btn_500 {
+    margin: 0;
+    height: 100%;
+    border: none;
+    background-color: $bg-color-zero;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: x-large;
+}
