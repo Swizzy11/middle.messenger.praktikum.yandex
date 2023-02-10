@@ -1,11 +1,11 @@
-# Middle frontend. 
+# Middle frontend. [![Netlify Status](https://api.netlify.com/api/v1/badges/e844dcab-c227-4712-ba3a-4bbd2688069f/deploy-status)](https://app.netlify.com/sites/playful-rabanadas-07623b/deploys)
 ## sprint: 1
 Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node-id=0%3A1&t=niYmVaAe1UiTzQhi-0)
 
  > Commands:
  > > start server : ```npm run start```
  > > build : ```npm run build```
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e844dcab-c227-4712-ba3a-4bbd2688069f/deploy-status)](https://app.netlify.com/sites/playful-rabanadas-07623b/deploys)
+
  Deployed: [Netlify](https://playful-rabanadas-07623b.netlify.app)
 
  Project description:
