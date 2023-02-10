@@ -1,15 +1,13 @@
 $primary-color:#ffa33a41;
 $font-size-small: small;
 $bg-color-zero:rgba(0, 0, 0, 0);
-
+$message-color-border: #ffa33a70;
 #root {
     width: 100%;
     height: 100%;
     display: flex;
-    text-align: center;
     justify-content: center;
     align-items: center;
-
     margin: 0;
     padding: 0;
     
@@ -28,7 +26,7 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 .input_common {
     height: 3vh;
     width: 15vw;
-    border-radius: 10px;
+    border-radius: 8px;
     border:1px solid #c07a2b;
     background-color: $primary-color;
 }
@@ -40,9 +38,24 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     border:1px solid #c07a2b;
     border-radius: 6px;
 }
+.underline_name {
+    text-decoration: underline;
+    font-size: large;
+}
 
-
-
+.error_email,
+.error_password,
+.error_name,
+.error_surname,
+.error_phone,
+.error_login {
+    font-size: x-small;
+    color: red;
+    text-align: center;
+}
+.error_outline {
+    outline: 1px solid red ;
+}
 /* menu */
 
 
@@ -75,7 +88,7 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 /* block home */
 
 .block {
-    width: 98vw;
+    width: 99vw;
     height: 98vh;
 }
 .messager_home_page {
@@ -90,6 +103,8 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     width: 100%;
     height: 6%;
     display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
 .message_body {
     width: 100%;
@@ -97,44 +112,105 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 }
 .chat {
     height: 90%;
+    overflow:scroll;
+    overflow-x:hidden;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0 0% 50%);
+    display: flex;
+    align-items: flex-end;
+}
+.message_list {
+    display: flex;
+    width: 80vw;
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+        .you_message {
+            width: 40%;
+            background-color: #ffa33abe;
+            border: 1px solid $message-color-border;
+            border-radius: 10px;
+            border-bottom-right-radius:0px;
+            margin-left: 16%;
+            align-self: flex-end;
+        }
+        .friend_message {
+            width: 40%;
+            background-color: #ffa33abe;
+            border: 1px solid $message-color-border;
+            border-radius: 10px;
+            border-top-left-radius: 0px;
+            margin-left: 2%;
+            margin-bottom: 6%;
+            display: flex;
+            align-self: flex-start;
+            flex-wrap: wrap;
+        }
+        .message_people_name {
+            align-self: flex-start;
+            width: 30%;
+            margin-left: 10px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .message_for_people {
+            display: flex;
+            width: 100%;
+            height: 70%;
+            margin: 0;
+            margin-left: 10px;
+        }
+        .message_date {
+            width: 100%;
+            text-align: end;
+            margin-right: 10px;
+    }
+
 }
 
 #form_message {
     display: flex;
     align-items: center;
-    width: 80%;
     justify-content: center;
     width: 100%;
-    height: 6%;
+    height: 7%;
+    margin-top: 10px;
 }
 
 .input_message {
-    width: 80%;
-    margin-left: 3%;
+    width: 70vw;
     height: 40%;
     border: 1px solid gray;
-    border-radius: 20rem;
+    border-radius: 8px;
     background-color: $primary-color;
 }
 .btn_upload {
     width: 3vw;
     height: 40%;
-    margin-left: 1vw;
+    margin-right: 1vw;
     border: none;
     background-color:white;
+    background-image: url("../static/icons/arrow-bar-up.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 .btn_send {
-    width: 4%;
+    width: 3vw;
     height: 40%;
-    margin-left: 3%;
+    margin-left: 1vw;
     border-radius: 15px;
     background-color: #ffa33a;
+    background-image: url("../static/icons/arrow-up-left.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 } 
 
 .feed_block {
     display: flex;
     flex-wrap: wrap;
-    width: 24%;
+    width: 15%;
     height: 100%;
     border-left: 1px solid rgba(107, 107, 107, 0.3);
 }
@@ -143,7 +219,7 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 10%;
+    height: 8%;
     margin-top: 10px;
 }
 
@@ -153,14 +229,14 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     justify-content: space-between;
 }
 
-#btn_profile {
+.btn_profile {
     cursor: pointer;
     background-color: $bg-color-zero;
     border: none;
     text-decoration: underline;
     font-size: $font-size-small;
 }
-#btn_logout {
+.btn_logout {
     cursor: pointer;
     background-color: $bg-color-zero;
     border: none;
@@ -172,14 +248,12 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
 }
 .input_search {
-    margin-top: 1vw;
-    width: 15vw;
-    height: 40%;
+    margin-top: 20px;
+    width: 10vw;
     border: 1px solid gray;
-    border-radius: 20rem;
+    border-radius: 5px;
     background-color: $primary-color;
 }
 
@@ -187,6 +261,35 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     height: 90%;
     width: 100%;
 }
+.feed_element {
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+}
+.photo{
+    width: 50px;
+    height: 40px;
+    background-color:$primary-color;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+.text_info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 10px;
+}
+.name_people {
+    font-size: large;
+}
+.message_you {
+    font-size: x-small;
+}
+
 
 
 /* block edit profile */
@@ -195,10 +298,17 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 .block_edit_profile {
     margin: 0;
     padding: 0;
-    width: 50vw;
-    height: 90vh;
+    width: 70vw;
+    height: 99vh;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
+}
+.form_block {
+    width: 100%;
+    height: 14%;
+    display: flex;
+    align-items: center;
+    
 }
 .input_form {
     margin-left: 4vw;
@@ -209,13 +319,7 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     height: 40%;
     border:1px solid #c07a2b;
 }
-.form_block {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    align-items: center;
-    
-}
+
 .name_features {
     font-size: large; 
     margin-left: 20%;
@@ -267,7 +371,7 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 }
 .form {
     width: 100%;
-    height: 20%;
+    height: 15%;
     display: flex;
     align-items: center;
     
@@ -321,9 +425,10 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
     margin: 0;
     padding: 0;
-    width: 150%;
+    width: 30vw;
     height: 45%;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
@@ -352,17 +457,18 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     height: 15%;
     display: flex;
     align-items: center;
-    flex-direction: column;  
+    flex-direction: column;
+    justify-content: center;  
 }
 .btn_enter {
     font-size: $font-size-small;
-    padding: 3%;
-    width: 30%;
+    width: 8vw;
+    height: 3vh;
     border-radius: 15px;
     background-color: #ffa33a;
 }
 .btn_no_account {
-    margin-top: 1%;
+    margin-top: 5%;
     font-size: x-small;
     background-color: $bg-color-zero;
 }
@@ -373,14 +479,14 @@ $bg-color-zero:rgba(0, 0, 0, 0);
     margin: 0;
     padding: 0;
     width: 35vw;
-    height: 75vh;
+    height: 90vh;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
 }
 
 .registration_header {
     width: 100%;
-    height: 15%;
+    height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -389,7 +495,7 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 
 .registration_body {
     width: 100%;
-    height: 60%;
+    height: 78%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -398,14 +504,15 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 
 
 .registration_footer {
-    margin-top: 8vh;
+    height: 5%;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: flex-end;  
 }
 .btn_registration {
-    margin-top: 2vh;
+    height: 4vh;
+    width: 12vw;
     padding: 2%;
     border-radius: 15px;
     background-color: #ffa33a;
@@ -421,7 +528,9 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 
 /* block error 404 */
 
-
+.block_error_404 {
+    text-align: center;
+}
 .error_description {
     width: 100%;
     height: 60%;
@@ -453,7 +562,9 @@ $bg-color-zero:rgba(0, 0, 0, 0);
 
 /* block error 500 */
 
-
+.block_error_500 {
+    text-align: center;
+}
 .error_description {
     width: 100%;
     height: 60%;
