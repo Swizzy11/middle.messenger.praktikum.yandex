@@ -1,19 +1,17 @@
 import Block from "../../core/Block";
-import tmp from "./tmp.hbs";
+import tpl from "./tpl";
 
 export interface IUnderline {
   text: string;
 }
 
-export default class UnderlineName extends Block<IUnderline> {
+export default class UnderlineName extends Block {
     constructor(props:IUnderline) {
       super("div", props);
     }
   
     render() {
-
-      return this.compile(tmp, {
-        text: this.props.text,
-      });
+      //@ts-ignore
+      return this.compile(tpl);
     }
   } 

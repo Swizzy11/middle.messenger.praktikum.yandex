@@ -1,3 +1,5 @@
+import { json } from "stream/consumers";
+
 const enum METHODS {
   GET = "GET",
   POST = "POST",
@@ -5,8 +7,6 @@ const enum METHODS {
   DELETE = "DELETE"
 }
 
-
-type MethodType = (url: string, options: IOptions) => void
 
 function queryStringify(value: {[key:string]: string}) {
   if (typeof value !== "object") {
@@ -19,64 +19,98 @@ function queryStringify(value: {[key:string]: string}) {
   }, "?")
 }
 
-interface IOptions {
-  headers?: {
-    [key: string]: string
-  },
-  method?: string,
-  data?:{
-    [key: string]: string
-  },
-  timeout?: number
-}
+type Options = {
+  method: METHODS;
+  headers?: Record<string, string>
+  data?: any;
+  timeout?: number;
+};
+
+const mainUrl = 'https://ya-praktikum.tech/api/v2';
 
 class HTTPTransport {
-  get: MethodType = (url, options = {}) => {
-    return this.request(url, {...options, method: METHODS.GET}, options.timeout)
-  }
-  post: MethodType = (url, options = {}) => {
-  return this.request(url, {...options, method: METHODS.POST}, options.timeout)
-  }
-  put: MethodType = (url, options = {}) => {
-    return this.request(url, {...options, method: METHODS.PUT}, options.timeout)
-  }
-  delete: MethodType = (url, options = {}) => { 
-    return this.request(url, {...options, method: METHODS.DELETE}, options.timeout)
+  async get<TResponse>(url: string, data?: {}): Promise<TResponse> {
+      return this.request(url, {method: METHODS.GET, data});
   }
 
-  request = (url: string, options: IOptions = {}, timeout = 5000) => {
-    const {headers = {}, method, data} = options
+  async post<TResponse>(url: string, data: {}): Promise<TResponse> {
+      return this.request(url, {method: METHODS.POST, data});
+  }
 
-    return new Promise(function(resolve, reject) {
-      if (!method) {
-        reject("No method")
-        return;
-      }
+  async put<TResponse>(url: string, data: {}): Promise<TResponse> {
+      return this.request(url, {method: METHODS.PUT, data});
+  }
 
-      const xhr = new XMLHttpRequest();
-      const isGet = method === METHODS.GET;
+  async delete<TResponse>(url: string, data: {}): Promise<TResponse> {
+      return this.request(url, {method: METHODS.DELETE, data});
+  }
 
-      xhr.open(method,isGet && !!data? `${url}${queryStringify(data)}`: url,)
+  async request<TResponse>(
+      url: string,
+      options: Options = {method: METHODS.GET},
+  ): Promise<TResponse> {
+      return new Promise((resolve, reject) => {
+          const {headers = {},method, data} = options;
 
-      Object.keys(headers).forEach(key => {
-        xhr.setRequestHeader(key, headers[key])
-      })
+          const xhr:XMLHttpRequest = new XMLHttpRequest();
 
-      xhr.onload = function() {
-        resolve(xhr)
-      }
+          if (method === METHODS.GET) {
+              if (data) {
+                  url = `${url}?${Object.entries(data)
+                      .map(([key, value]: [key: string, value: any]): string => {
+                          return `${key}=${value}`;
+                      })
+                      .join('&')}`;
+              }
+          }
 
-      xhr.onabort = reject
-      xhr.onerror = reject
+          xhr.open(method, mainUrl + url);
+          xhr.withCredentials = true
 
-      xhr.timeout = timeout
-      xhr.ontimeout = reject
+          Object.keys(headers).forEach(key => {
+            xhr.setRequestHeader(key, headers[key])
+          })
 
-      if (isGet || !data) {
-        xhr.send()
-      } else {
-        xhr.send(data.toString())
-      }
-    });
-  };
+
+          xhr.onload = function () {
+              let resp;
+              if (~xhr?.getResponseHeader('Content-Type')?.indexOf('application/json')!) { 
+                resp = JSON.parse(xhr.response)
+              } else {
+                  resp = xhr.response;
+              }
+              if (xhr.status === 200) {
+                  resolve(resp);
+
+              }else if(xhr.response === `{"reason":"Login already exists"}`)  {
+                  resolve(resp);
+              }else if(xhr.response === `{"reason":"Login or password is incorrect"}`)  {
+                  resolve(resp);
+              }else if(xhr.response === `{"reason":"User already in system"}`)  {
+                  resolve(resp);
+              }else {
+                  reject(resp)
+              }
+          };
+
+          xhr.onabort = () => reject({reason: "Abort"});
+          xhr.onerror = () => reject({reason: "Error network"});;
+          xhr.ontimeout = () => reject({reason: "Timeout"});;
+
+          if (method === METHODS.GET || !data) {
+              xhr.send();
+          } else {
+              if (data instanceof FormData) {
+                  xhr.setRequestHeader("Content-Type", "multipart/form-data");
+                  xhr.send(data);
+              } else {
+                  xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+                  xhr.send(JSON.stringify(data));
+              }
+
+          }
+      });
+  }
 }
+
+export default HTTPTransport

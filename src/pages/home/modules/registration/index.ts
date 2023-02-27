@@ -1,39 +1,117 @@
-import tpl from './index.hbs';
-import Block from "../../../../core/Block";
+import validator from "../../../../utils/validator"
+import buttonValidator from "../../../../utils/validatorButton"
+import { Input } from "../../../../components/input"
+import Button from "../../../../components/buttonSendInfo/Button";
+import Router from "../../../../utils/router"
 
-import { Input } from "../../../../components/input";
-import { Button } from "../../../../components/button";
-import { IInput } from '../../../../components/input/input';
-import { IButton } from '../../../../components/button/Button';
+import Registration from "./registrationPage"
+
+import AutheficationController from "../../../../../service/controllers/authController"
+import { Connect } from "../../../../../service/store";
 
 
-type PropsType = {
-    userName: Block<IInput>,
-    userSurname: Block<IInput>,
-    email: Block<IInput>,
-    password: Block<IInput>,
-    phone: Block<IInput>,
-    login: Block<IInput>,
-    buttonRegistr: Block<IButton>,
-    buttonHasAccount: Block<IButton>,
-}
 
-export default class Registration extends Block<PropsType> {
-    constructor(props: PropsType) {
-        super("div",props);
-    }
+const router = new Router("#root")
 
-    render() {
-        return this.compile(tpl, {
-            userName: this.props.userName,
-            userSurname: this.props.userSurname,
-            email: this.props.email,
-            login: this.props.login,
-            password: this.props.password,
-            phone: this.props.phone,
-            buttonRegistr: this.props.buttonRegistr,
-            buttonHasAccount: this.props.buttonHasAccount,
-        })
-    }
-    
-}
+export default Connect(
+        Registration,
+        (state) => {
+                return {
+                        userName: new Input({
+                                type: "text",
+                                name: "first_name",
+                                class: "input_common first_name",
+                                events: {
+                                        focusin: () => {
+                                                validator("first_name")
+                                        }
+                                }
+                            }),
+                    
+                        userSurname: new Input({
+                                type: "text",
+                                name: "second_name",
+                                class: "input_common second_name",
+                                events: {
+                                        focusin: () => {
+                                                validator("second_name")
+                                        }
+                                } 
+                            }),
+                    
+                        email: new Input({
+                                type: "email",
+                                name: "email",
+                                class: "input_common email",
+                                events: {
+                                        focusin: () => {
+                                                validator("email")
+                                        }
+                                } 
+                            }),
+            
+                        login: new Input({
+                                type: "text",
+                                name: "login",
+                                class: "input_common login",
+                                events: {
+                                        focusin: () => {
+                                                validator("login")
+                                        }
+                                }
+                            }),
+                    
+                        password: new Input({
+                                type: "password",
+                                name: "password",
+                                class: "input_common password",
+                                events: {
+                                        focusin: () => {
+                                                validator("password")
+                                        }
+                                } 
+                            }),
+                    
+                        phone: new Input({
+                                type: "tel",
+                                name: "phone",
+                                class: "input_common phone",
+                                events: {
+                                        focusin: () => {
+                                                validator("phone")
+                                        }
+                                }
+                            }),
+                    
+                        buttonRegistr: new Button({
+                                className: "btn btn_registration",
+                                child: `Зарегистрироваться`,
+                                type: "button",
+                                events: {
+                                        click: (e: MouseEvent) => {
+                                                if(buttonValidator()) {
+                                                    e.preventDefault();
+                                                    const regData = buttonValidator();
+                                                    console.log(regData)
+                                                    const reg = new AutheficationController();
+                                                    reg.signUp(regData)
+                                                };
+                                        }
+                                }
+                            }),
+                    
+                        buttonHasAccount: new Button({
+                                className: "btn btn_has_account",
+                                child: `Есть аккаунт?`,
+                                type: "button",
+                                placeholder: "Напишите сообщение...",
+                                events: {
+                                        click: () => {
+                                            router.go("/login")
+                                        }
+                                }
+                            }),
+                    
+                }
+        }
+)

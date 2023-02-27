@@ -1,36 +1,53 @@
+import { UnderlineName } from "../../../../components/underlineName";
+import Button from "../../../../components/buttonSendInfo/Button";
+import ButtonClose from "../../../../components/bottonClose/Button";
+import Router from "../../../../utils/router"
+import UserProfile from "./userProfilePage";
+import { Connect } from "../../../../../service/store";
+import Store from "../../../../../service/store";
 
-import tpl from './index.hbs';
-import Block from "../../../../core/Block";
+const router = new Router("#root")
+ 
 
-import { Button } from "../../../../components/button";
-import { IUnderline } from '../../../../components/underlineName/underlineName';
-import { IButton } from '../../../../components/button/Button';
 
-type PropsType = {
-    buttonEdit: Block<IButton>,
-    userName: Block<IUnderline>,
-    userSurname: Block<IUnderline>,
-    email: Block<IUnderline>,
-    login: Block<IUnderline>,
-    nameInChat: Block<IUnderline>,
-    password: Block<IUnderline>,
-    phone: Block<IUnderline>,
-}
 
-export default class UserProfile extends Block<PropsType> {
-    constructor(props: PropsType) {
-        super("div", props);
-    }
-    render() {
-        return this.compile(tpl,{
-            buttonEdit: this.props.buttonEdit,
-            userName: this.props.userName,
-            userSurname: this.props.userSurname,
-            login: this.props.login,
-            email: this.props.email,
-            nameInChat: this.props.nameInChat,
-            password: this.props.password,
-            phone: this.props.phone,
-        })
-    }
-}
+export default Connect(
+        UserProfile, 
+        (state) => {
+            if(Store.getState() !== undefined) {
+                  return {  //@ts-ignore
+                        userPhoto: `<img class="user_photo" src="${Store.getState().user.avatar}">`,
+                        //@ts-ignore
+                        userName: Store.getState().user.first_name,
+                        //@ts-ignore
+                        userSurname: Store.getState().user.second_name,
+                        //@ts-ignore
+                        email: Store.getState().user.email,
+                        //@ts-ignore
+                        login: Store.getState().user.login,
+                        //@ts-ignore
+                        nameInChat: Store.getState().user.display_name,
+                        //@ts-ignore
+                        phone: Store.getState().user.phone,
+
+                        buttonEdit: new Button({
+                              className: "btn btn_edit",
+                              child:"Редактировать...",
+                              events: {
+                                    click: () => {
+                                          router.go("/settings")
+                                    }
+                              }
+                        }),
+                        buttonClose: new ButtonClose({
+                              className: "btn btn_close",
+                              events: {
+                                    click: () => {
+                                          router.go("/messanger")
+                                    }
+                              }
+                        })
+                  }
+            }
+              
+})
