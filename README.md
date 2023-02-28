@@ -6,7 +6,7 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
  > > start server : ```npm run start```
  > > build : ```npm run build```
 
- Deployed: [Netlify](https://playful-rabanadas-07623b.netlify.app)
+ Deployed: [Netlify](https://curious-cajeta-790264.netlify.app)
 
  Project description:
  Проект находится на стадии разработки. 
