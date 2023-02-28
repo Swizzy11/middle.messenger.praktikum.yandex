@@ -16,7 +16,7 @@ export default Connect(
         (state) => {
             if(Store.getState() !== undefined) {
                   return {  //@ts-ignore
-                        userPhoto: `<img class="user_photo" src="${Store.getState().user.avatar}">`,
+                        userPhoto: `<img class="user_photo">`,
                         //@ts-ignore
                         userName: Store.getState().user.first_name,
                         //@ts-ignore

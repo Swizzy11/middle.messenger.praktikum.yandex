@@ -11,7 +11,7 @@ export class AutheficationController {
     }
 
     async signIn(data: Signin) {
-        
+        try{
         const response:any = await this.api.loginApi(data);
 
         if(response["reason"] === "Login or password is incorrect") {
@@ -37,8 +37,13 @@ export class AutheficationController {
         store.set("user", userInfo)
         router.go("/messanger");
     }
+    catch(e) {
+        console.log(e.message)
+    }
+    }
 
     async signUp(data: Signup) {
+        try {
         const response:any = await this.api.registration(data)
         if(response["reason"] === "Login already exists") {
             const error:any =  document.querySelector(".error_phone");
@@ -51,14 +56,28 @@ export class AutheficationController {
         store.set("user", userInfo)
         router.go("/messanger");
     }
+    catch(e) {
+        console.log(e.message)
+    }
+    }
 
     async logout() {
+        try{
         await this.api.logout();
         router.go("/login");
+        }
+        catch(e) {
+            console.log(e.message)
+        }
     }
 
     async userInfo() {
+        try {
         await this.api.userInfo();
+        }
+        catch(e) {
+            console.log(e.message)
+        }
     }
 
     

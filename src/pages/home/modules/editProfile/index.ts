@@ -27,7 +27,7 @@ export default Connect(
                                         name: "avatar",
                                         accept: "image/*",
                                         //@ts-ignore
-                                        userPhoto: Store.getState().user.avatar
+                                        userPhoto: "",
                                 }),
         
                                 userName: new Input({

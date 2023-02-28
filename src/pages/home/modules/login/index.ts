@@ -14,6 +14,11 @@ const router = new Router("#root")
 export default Connect(
         Login,
         (state) => {
+                if(Store.getState() === undefined) {
+                        const userApi = new AutheficationController
+                        const userInfo = userApi.userInfo()
+                        Store.set("user", userInfo)
+                }
                return {
                 login: new Input({
                         type: "text",

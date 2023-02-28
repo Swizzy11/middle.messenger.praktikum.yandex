@@ -17,7 +17,7 @@ export default Connect(
                                 child: "Вернуться на главную?",
                                 events: {
                                         click: () => {
-                                            router.go("/")
+                                            router.go("/login")
                                         }
                                 }
                         })

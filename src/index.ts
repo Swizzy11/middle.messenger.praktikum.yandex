@@ -17,10 +17,18 @@ import Router from "./utils/router"
 
 
 import Index from "./layout"
-import { ChatConroller } from "../service/controllers/chatController"
+
 import Store from "../service/store"
 
+import { AuthAPI } from "../service/authAPI"
 
+
+
+        const userApi = new AuthAPI()
+        const userInfo = userApi.userInfo()
+        Store.set("user", userInfo)
+
+console.log(Store.getState())
 const router = new Router("#root")
 router
         .use("/messanger",Index, "div", {

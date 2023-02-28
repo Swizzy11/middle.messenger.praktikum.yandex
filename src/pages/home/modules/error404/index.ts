@@ -19,8 +19,8 @@ export default Connect(
                                         click: () => {
                                                 const logout = new AutheficationController();
                                                 logout.logout()
-                                                router.go("/login")
-                                                location.reload()
+                                                setTimeout(()=>router.go("/login"), 500)
+                                                
                                         }
                                 }
                         })

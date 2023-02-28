@@ -25,11 +25,11 @@ const router = new Router("#root")
 export default Connect(
         mainPage,
         (state) => {
-                if (window.performance) {
+                setTimeout(()=>chatsListBody(), 100)
                         if (performance.navigation.type === 1) {   
-                        setTimeout(()=>chatsListBody(), 1000)
+                        setTimeout(()=>chatsListBody(), 100)
                         } 
-                      }
+                    
                 
                 const chat = new ChatConroller()
                 //@ts-ignore
@@ -41,7 +41,7 @@ export default Connect(
         
                         return {
                                 //@ts-ignore
-                                avatar:`<img class="user_photo_chat" src="${Store.getState().user.avatar}">`,
+                                avatar:`<img class="user_photo_chat" >`,
         
                                 userName: new UnderlineName({
                                         //@ts-ignore
