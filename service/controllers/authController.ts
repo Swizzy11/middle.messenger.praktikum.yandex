@@ -24,7 +24,7 @@ export class AutheficationController {
             setTimeout(()=>{
                 error.innerHTML = ""
                 router.go("/error404"); 
-                }, 2000)
+                }, 800)
 
             return;
             

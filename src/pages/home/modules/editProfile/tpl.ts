@@ -36,11 +36,6 @@ const tpl =
                         {{{nameInChat}}}
                     </div>
                     <div class="error_login"></div>
-                    {{!-- <div class="form_block">
-                        <h3 class="name_features">Пароль:</h3>
-                        {{{password}}}
-                    </div> --}}
-                    <div class="error_password"></div>
                     <div class="form_block">
                         <h3 class="name_features">Номер телефона:</h3>
                         {{{phone}}}
@@ -49,7 +44,7 @@ const tpl =
                 </form>
             </div>
             <div class="edit_profile_footer">
-                {{{buttonSave}}}
+                {{{buttonChangePassword}}}{{{buttonSave}}}
             </div>
         </div>
 `

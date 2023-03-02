@@ -1,5 +1,6 @@
 import ChatConroller from "../../../service/controllers/chatController";
 import Store from "../../../service/store";
+import newMessage from "../chatMessage/newMessage/newMassage";
 
 import getOldMessage from "../chatMessage/oldMessage/oldMessage";
 
@@ -14,12 +15,18 @@ function chatsListBody() {
     const userId = Store.getState().user.id;
     const chat = new ChatConroller()
     //@ts-ignore
-    const name = Store.getState().user.first_name
+    
     //@ts-ignore
     const chats = Store.getState().chats.message;
     const lengthChats = Object.keys(chats).length
+    const btn_send = document.querySelector(".btn_send");    
+
+
+        let token;
+        let socket;
+
     for(let i = 0; i < lengthChats; i++) {
-  
+        
         let lastMessage;
 
         //@ts-ignore
@@ -29,6 +36,7 @@ function chatsListBody() {
         //@ts-ignore
             lastMessage = Store.getState().chats.message[i].last_message.content
         }
+
         //@ts-ignore
         const title = Store.getState().chats.message[i].title
 
@@ -58,55 +66,115 @@ function chatsListBody() {
         feed_element.addEventListener("click", ()=> {
                 //@ts-ignore
                 const chatId:any = Store.getState().chats.message[i].id;
-                chat.getToken(chatId)
                 //@ts-ignore
-                const token = Store.getState().token.token;
-                const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
-                
+                const currentChat:any = Store.getState().chats.message[i];
 
+                setTimeout(()=>{let chatName = <HTMLElement>document.querySelector(".chat_name")
+                //@ts-ignore
+                chatName.innerHTML += `Chat: ${Store.getState().chats.message[i].title}`}, 1000)
+
+                //@ts-ignore
+                if(Store.getState().currentChat !== "" || Store.getState().currentChat !== undefined) {
+                    Store.set("current", chatId);
+                }
+               
+                chat.getToken(chatId)
+                
+                chat.getToken(chatId)
+
+                
+               
+            setTimeout(()=>{
+                //@ts-ignore
+                token = Store.getState().tokenSet.token;
+                socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
+                Store.set("socket", socket)
+                //@ts-ignore
+                socket.addEventListener("open", () => {
+              
+                    socket.send(
+                      JSON.stringify({
+                        content: "0",
+                        type: "get old",
+                      })
+                    );
+                  });
+                  socket.addEventListener("close", (event) => {
+                    if (event.wasClean) {
+                      console.log("Соединение закрыто чисто");
+                    } else {
+                      console.log("Обрыв соединения");
+                    }
+              
+                    console.log(`Код: ${event.code} | Причина: ${event.reason}`);
+                  });
+                  
                 socket.addEventListener("message", event => {
-                                Store.set("lastMessage", "")
+                                
                                 let lastMessage;
                                 if(event.data === undefined || event.data === "WS token is not valid") {
                                     lastMessage = ""
-                                }else {
-                                    lastMessage = JSON.parse(event.data)
-                                }
-                                Store.set(`lastMessage`, lastMessage)
-                            });
+                                }else if(JSON.parse(event.data).type === "user connected") {
+                                    console.log(JSON.parse(event.data).type);
+                                }else if(JSON.parse(event.data).type === "message"){
+                                    
+                                    let name = JSON.parse(event.data).user_id
+                                    let message = JSON.parse(event.data).content;
+                                    let time = JSON.parse(event.data).time;
 
-                socket.addEventListener("open", () => {
-                    socket.send(JSON.stringify({
-                        content: 0,
-                        type: "get old",
-                          }))
-                 });
+                                    //@ts-ignore
+                                    if(Store.getState().user.id !== name){newMessage(message,time,name)}
+                                }
+                                else {
+                                    Store.set("lastMessage", "")
+                                    
+                                    lastMessage = JSON.parse(event.data)
+                                    Store.set(`lastMessage`, lastMessage);
+                                    //@ts-ignore
+                                    const chats = Store.getState().lastMessage;
+                                    const lengthChats = Object.keys(chats).length
+
+                                    for(let i = 0; i < lengthChats; i++) {
+                                        //@ts-ignore
+                                        let oldMessage = lastMessage;
+                                        let name:string; 
+                                        //@ts-ignore
+                                        if(lastMessage[i] !== undefined) {
+                                            //@ts-ignore
+                                            name = lastMessage[i].user_id
+                                        }
+                                        else{
+                                            name = ""
+                                        }
+                                        if(oldMessage[i] === undefined) {
+                                            return
+                                        }
+                                        //@ts-ignore
+                                        let friend_id = lastMessage[i].user_id;
+                                        //@ts-ignore
+                                        let message_time = lastMessage[i].time
+                                        getOldMessage(name, oldMessage[i].content, ".chat",friend_id, message_time);
+                                            
+                                    }
+                                }
+                                });
+                            
                  //@ts-ignore
-                const chats = Store.getState().chats.message;
-                const lengthChats = Object.keys(chats).length
-                                                        
-                setTimeout(()=>{
-                    for(let i = 0; i < lengthChats; i++) {
-                        //@ts-ignore
-                        let oldMessage = Store.getState().lastMessage
-                        if(oldMessage[i] === undefined) {
-                            return
-                        }
-                        //@ts-ignore
-                        
-                        getOldMessage(name,oldMessage[i].content, ".chat")  
-                            }}, 1000)
+                },
+                            
+            100)
 
         })
 
         feed_body?.appendChild(feed_element)
     }
+
+    
     }
     
     
 }
 
 
-export default chatsListBody;
 
-
+export default chatsListBody

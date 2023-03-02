@@ -1,7 +1,7 @@
 import API,{ UserAPI } from "../userAPI"
 import Router from "../../src/utils/router.js"
 import store from "../store"
-import { UserProfileUpdate } from "../interfaceAPI";
+import { PasswordUpdate, UserProfileUpdate } from "../interfaceAPI";
 
 
 const router = new Router("#root")
@@ -16,6 +16,15 @@ export class UserConroller {
         try {
         const userInfo = await this.api.updateProfile(data)
         store.set("user", userInfo)
+        }
+        catch(e) {
+            console.log(e.message)
+        }
+
+    }
+    async updatePassword(oldPassword: PasswordUpdate, newPassword:PasswordUpdate) {
+        try {
+        const userInfo = await this.api.updatePassword(oldPassword, newPassword);
         }
         catch(e) {
             console.log(e.message)

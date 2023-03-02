@@ -1,4 +1,3 @@
-import { UnderlineName } from "../../../../components/underlineName";
 import Button from "../../../../components/buttonSendInfo/Button";
 import ButtonClose from "../../../../components/bottonClose/Button";
 import Router from "../../../../utils/router"
@@ -6,10 +5,11 @@ import UserProfile from "./userProfilePage";
 import { Connect } from "../../../../../service/store";
 import Store from "../../../../../service/store";
 
+import addValue from "../../../../utils/heplerApp/addValue";
+
+
 const router = new Router("#root")
  
-
-
 
 export default Connect(
         UserProfile, 
@@ -35,7 +35,8 @@ export default Connect(
                               child:"Редактировать...",
                               events: {
                                     click: () => {
-                                          router.go("/settings")
+                                          router.go("/settings");
+                                          setTimeout(()=>{addValue()},200)
                                     }
                               }
                         }),

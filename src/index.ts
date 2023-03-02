@@ -17,18 +17,21 @@ import Router from "./utils/router"
 
 
 import Index from "./layout"
-
 import Store from "../service/store"
+import addValue from "./utils/heplerApp/addValue"
+import ChatConroller from "../service/controllers/chatController"
 
-import { AuthAPI } from "../service/authAPI"
-
-
-
-        const userApi = new AuthAPI()
-        const userInfo = userApi.userInfo()
-        Store.set("user", userInfo)
-
-console.log(Store.getState())
+if (performance.navigation.type === 1) {  
+        setTimeout(()=>{
+                const chats = new ChatConroller()
+                chats.getChats();
+                Store.set("current", "");
+                if(window.location.pathname === "/settings"){
+                        addValue()
+                }
+        },50 );
+        
+}
 const router = new Router("#root")
 router
         .use("/messanger",Index, "div", {

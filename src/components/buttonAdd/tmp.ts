@@ -10,6 +10,10 @@ const tmp =
     <div class="modal-body">
     {{{chatID}}}{{{inputChatID}}} 
     {{{userID}}}{{{inputUserID}}}
+    {{{oldPasswordID}}}{{{oldPassword}}}
+    {{{passwordID}}}{{{password}}}
+    {{{passwordRepeatID}}}{{{passwordRepeat}}}
+    {{{errorMessage}}}
     </div>
     <div class="modal-footer">
     {{{inputSend}}}

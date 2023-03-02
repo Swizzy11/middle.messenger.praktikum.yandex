@@ -53,8 +53,9 @@ export class ChatConroller {
 
     async getToken(id: string) {
         try{
+        
        const token = await this.api.getToken(id)
-       store.set("token", token)
+       store.set("tokenSet", token)
         }
         catch(e) {
             console.log(e.message)

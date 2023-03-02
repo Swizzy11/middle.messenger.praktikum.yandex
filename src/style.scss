@@ -1,6 +1,6 @@
 $primary-color:#ffa33a41;
 $font-size-small: small;
-$bg-color-zero:rgba(0, 0, 0, 0.027);
+$bg-color-zero:rgba(0, 0, 0, 0);
 $message-color-border: #ffa33a70;
 #root {
     width: 99%;
@@ -138,8 +138,6 @@ div .btn_close {
 .block {
     width: 100%;
     height: 99%;
-    opacity: 0;
-    animation: ani 1s forwards;
 }
 
 .messager_home_page {
@@ -160,7 +158,10 @@ div .btn_close {
             }
 }
 
-
+.chat_name {
+    margin-top: 1%;
+    margin-left: 70%;
+}
 .message_body {
     height: 100%;
 }
@@ -236,6 +237,7 @@ div .btn_close {
     height: 100%;
     border-left: 1px solid rgba(107, 107, 107, 0.3);
     margin-left: 1%;
+    width: 20vw;
 }
 
 .feed_header {
@@ -598,6 +600,22 @@ div .btn_close {
     background-color: #ffa33a;
 }
 
+.myBtn_ChangePassword {
+    width: 10vw;
+    margin-right: 17vw;
+    cursor: pointer;
+    font-size: $font-size-small;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #ffa33a59;
+    border: 1px solid #ffa33a;
+}
+.modal-footer div {
+    width: 40%;
+}
+.btn_sendPassword {
+    margin-right: 50px;
+}
 
 /* block profile */
 
@@ -776,7 +794,6 @@ div .btn_close {
     height: 80vh;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
-    animation: ani 1s forwards;
     border-radius: 1em;
     animation: ani 1s forwards;
                 --c: #ffa33a98; /* the border color */
@@ -847,7 +864,6 @@ div .btn_close {
 
 .block_error_404 {
     text-align: center;
-    animation: ani 1s forwards;
 }
 .error_description {
     width: 100%;
@@ -883,7 +899,6 @@ div .btn_close {
 
 .block_error_500 {
     text-align: center;
-    animation: ani 1s forwards;
 }
 .error_description {
     width: 100%;
@@ -913,11 +928,11 @@ div .btn_close {
 .chat p {
     display:flex;
     width: 100%;
-    justify-content: flex-end;
 }
 .you_message {
-    max-width: 45%;
-    min-width: 40%;
+    margin-left: 63%;
+    max-width: 40%;
+    min-width: 35%;
     background-color: #ffa33abe;
     border: 1px solid $message-color-border;
     border-radius: 10px;
@@ -927,16 +942,15 @@ div .btn_close {
     flex-direction: column;
 }
 .friend_message {
-    width: 40%;
+    max-width: 40%;
+    min-width: 35%;
     background-color: #ffa33abe;
     border: 1px solid $message-color-border;
     border-radius: 10px;
-    border-top-left-radius: 0px;
-    margin-left: 2%;
-    margin-bottom: 6%;
+    border-top-left-radius:0px;
+    margin-left: 3%;
     display: flex;
-    align-self: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
 }
 .message_people_name {
     align-self: flex-start;

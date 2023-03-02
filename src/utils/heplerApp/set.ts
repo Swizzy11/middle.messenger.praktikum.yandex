@@ -26,7 +26,6 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
     if (typeof object !== 'object' || object === null) {
         return object;
     }
-
     if (typeof path !== 'string') {
         throw new Error('path must be string');
     }

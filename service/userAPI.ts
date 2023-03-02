@@ -11,8 +11,12 @@ export class UserAPI extends BaseAPI {
         return http.put(`/user/profile/avatar`, formdata)
     }
 
-    async updatePassword(body: PasswordUpdate) {
-        return http.put(`/user/password`,body)
+    async updatePassword(oldPassword: PasswordUpdate, newPassword:PasswordUpdate) {
+        return http.put(`/user/password`,
+        {
+            oldPassword: oldPassword, 
+            newPassword: newPassword,
+        })
     }
 
     async updateProfile(body: UserProfileUpdate) {

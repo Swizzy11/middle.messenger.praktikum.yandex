@@ -18,6 +18,7 @@ import chatsListBody from "../../components/feedListBody/tmp";
 import { buttonAddChat } from "../../components/buttonAdd/buttonAddChat";
 import { buttonSendInfo } from "../../components/buttonSendInfo";
 import { buttonCloseModal } from "../../components/buttonAdd/butoonCloseModal";
+import getOldMessage from "../../components/chatMessage/oldMessage/oldMessage";
 
 const router = new Router("#root")
 
@@ -26,7 +27,8 @@ export default Connect(
         mainPage,
         (state) => {
                 setTimeout(()=>chatsListBody(), 100)
-                        if (performance.navigation.type === 1) {   
+                        if (performance.navigation.type === 1) {  
+                                
                         setTimeout(()=>chatsListBody(), 100)
                         } 
                     
@@ -37,8 +39,7 @@ export default Connect(
                 //@ts-ignore
                 if(Store.getState().chats !== undefined){
                         //@ts-ignore
-                        const chatId:any = Store.getState().chats.message[0].id;
-        
+                        const userId:any = Store.getState().user.id
                         return {
                                 //@ts-ignore
                                 avatar:`<img class="user_photo_chat" >`,
@@ -70,6 +71,7 @@ export default Connect(
                                                     const feedBar = <HTMLElement>document.querySelector(".feed_body");
                                                     console.clear()
                                                     feedBar.innerHTML = ""
+                                                    Store.set("current", "")
                                                     
                                                 }
                                         }
@@ -95,35 +97,39 @@ export default Connect(
                                                 click: (e) => {
                                                         e.preventDefault()
                                                         if(validator("input_message") === true){    
-                                                                const elem = <HTMLInputElement>document.querySelector(".input_message")
+                                                                        const elem = <HTMLInputElement>document.querySelector(".input_message")
                                                                 
                                                                         const text = elem.value;
+                                                                        let chatId: number;
                                                                         //@ts-ignore
-                                                                        const token = Store.getState().token.token
-                                                                        //@ts-ignore
-                                                                        const name = Store.getState().user.first_name;
-                                                                        //@ts-ignore
-                                                                        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
-                                                                        
-                                                                        if(elem) {
-                                                                                socket.addEventListener("open", (e) => {
-                                                                                        
+                                                                        if(Store.getState().current === "" || Store.getState().current === undefined) {
+                                                                                alert("Выберите чат!");
+                                                                        }else {
+                                                                               //@ts-ignore
+                                                                                chatId = Store.getState().current;
+                                                                                //@ts-ignore
+                                                                                const token = Store.getState().tokenSet.token
+                                                                                //@ts-ignore
+                                                                                const name = Store.getState().user.id;
+                                                                                //@ts-ignore
+                                                                                let socket = Store.getState().socket;
+                                                                                if(elem) {
                                                                                         socket.send(JSON.stringify({
                                                                                                 content: text,
                                                                                                 type: "message",
-                                                                                            }));
-                                                                                })
+                                                                                                }));
+                                                                                                window.scrollTo({
+                                                                                                        top: 0,
+                                                                                                        left: 0,
+                                                                                                        behavior: 'smooth'
+                                                                                                });
+                                                                                                elem.value = ""
+                                                                                        //@ts-ignore
+                                                                                                sendMessage(text, ".chat");          
+                                                                                        }
                                                                         }
                                                                         
-                                                                
-                                                                        window.scrollTo({
-                                                                                top: 0,
-                                                                                left: 0,
-                                                                                behavior: 'smooth'
-                                                                              });
-                                                                        elem.value = ""
-                                                                    //@ts-ignore
-                                                                        sendMessage(name, text, ".chat")
+                                                                        
                                                                 }
                                                         }
                                                 }
@@ -174,11 +180,19 @@ export default Connect(
                                                   }
                                                 }
                                               }),
+                                              
                                               closeModal: new buttonCloseModal({
                                                 events: {
                                                   click: () => {
-                                                    let modal:any = document.getElementById('myModalChatAdd');               
-                                                      let span:any = document.getElementsByClassName("close")[0];
+                                                    let modal:any = document.getElementById('myModalChatAdd');
+                                                    const modalClose = document.getElementsByClassName("close")
+                                                    let span;
+                                                    if(modalClose.length === 3) {
+                                                        span = document.getElementsByClassName("close")[0];
+                                                    }else {
+                                                        span = document.getElementsByClassName("close")[1];
+                                                    }                
+                                                    
                                                       span.addEventListener("click", function() {
                                                               modal.style.display = "none";
                                                               }) 
@@ -231,7 +245,14 @@ export default Connect(
                                                 events: {
                                                   click: () => {
                                                     let modal:any = document.getElementById('myModalUserAdd');               
-                                                      let span:any = document.getElementsByClassName("close")[1];
+                                                    let modalClose = document.getElementsByClassName("close")
+                                                    let span:Node;
+
+                                                    if(modalClose.length === 4) {
+                                                        span = document.getElementsByClassName("close")[2];
+                                                    }else {
+                                                        span = document.getElementsByClassName("close")[1];
+                                                    } 
                                                       span.addEventListener("click", function() {
                                                               modal.style.display = "none";
                                                               }) 

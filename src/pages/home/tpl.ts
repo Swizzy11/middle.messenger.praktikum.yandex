@@ -5,6 +5,7 @@ const tpl =
     <div class="header_message">
             {{{avatar}}}
             {{{userName}}}
+            <div class="chat_name"></div>
    </div>
    <hr style="width: 95%;margin: auto ;opacity: .3;">
        <div class="chat">

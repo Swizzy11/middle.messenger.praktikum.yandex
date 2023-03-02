@@ -12,6 +12,7 @@ const tmp =
     class="input_common add_chat_input"
  >
     </div>
+    {{{erroMessage}}}
     <div class="modal-footer">
     {{{inputSend}}}
     </div>

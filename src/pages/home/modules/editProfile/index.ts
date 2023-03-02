@@ -9,6 +9,14 @@ import UserConroller from "../../../../../service/controllers/userController"
 import { Connect } from "../../../../../service/store"
 import { Avatar } from "../../../../components/avatar"
 import Store from "../../../../../service/store"
+import { buttonAdd } from "../../../../components/buttonAdd"
+import { buttonAddChat } from "../../../../components/buttonAdd/buttonAddChat"
+import { buttonCloseModal } from "../../../../components/buttonAdd/butoonCloseModal"
+import { buttonSendInfo } from "../../../../components/buttonSendInfo"
+import comparisonPassword from "../../../../utils/heplerApp/passwordComparison"
+import { errorMessage } from "../../../../components/errorMessage"
+import validatorPassword from "../../../../utils/validatorPassword"
+
 
 const router = new Router("#root")
 
@@ -142,6 +150,95 @@ export default Connect(
                                                         router.go("/messanger")
                                                 }
                                         }
+                                }),
+
+                                buttonChangePassword: new buttonAdd({
+                                        errorMessage: new errorMessage({
+                                                class: "error_message_pass",
+                                                text: ``
+                                        }),
+                                        buttonAddChat: new buttonAddChat({
+                                                child: "Изменить пароль",
+                                                class: "myBtn_changePassword",
+                                                events: {
+                                                  click: (e) => {
+                                                    e.preventDefault()
+                                                    let modal:any = document.getElementById('changePassword');
+                                                    modal.style.display = "block";
+                                                  }
+                                                }
+                                              }),
+                                        modalID:"changePassword",
+                                        modalName: "Изменение пароля",
+                                        inputSend: new buttonSendInfo({
+                                                className: 'btn btn_add btn_sendPassword',
+                                                child: "Change",
+                                                events: {
+                                                  click: (e) => {
+                                                    e.preventDefault()
+                                                    
+                                                        const modal:any = document.getElementById('changePassword');
+                                                        const errorMessage:any = document.querySelector(".error_message_pass");
+                                                        const oldPassword:any = document.querySelector(".oldPassword")
+                                                        const password:any = document.querySelector(".change_password");
+                                                        errorMessage.style.color = "red";
+                                                        errorMessage.style.fontSize = "smaller";
+                                                        let error_password = <HTMLDivElement>document.querySelector(".error_password") 
+                                                        if(validatorPassword("passwordValid") === true) {
+                                                                if(oldPassword.value !== "" && oldPassword.value !== undefined){
+                                                                        if(comparisonPassword() === true) {
+                                                                                errorMessage.innerHTML = ""
+                                                                                const userController = new UserConroller();
+                                                                                //@ts-ignore
+                                                                                userController.updatePassword(oldPassword.value, password.value)
+                                                                                modal.style.display = "none";
+                                                                        }else {
+                                                                        errorMessage.innerHTML = "Пароли отличаются";
+                                                                        errorMessage.style.color = "red";
+                                                                        }
+                                                                }else {
+                                                                        errorMessage.innerHTML = "Впишите старый пароль";  
+                                                                }
+                                                        }
+                                                        
+                                                    
+                                                        
+                                                  }
+                                                }
+                                              }),
+                                        closeModal: new buttonCloseModal({
+                                                events: {
+                                                  click: () => {
+                                                        const modal:any = document.getElementById('changePassword');
+                                                        const modalClose = document.getElementsByClassName("close")
+                                                        let span:Node;
+
+                                                    if(modalClose.length === 4) {
+                                                        span = document.getElementsByClassName("close")[3];
+                                                    }else {
+                                                        span = document.getElementsByClassName("close")[0];
+                                                    }            
+                                                      span.addEventListener("click", function() {
+                                                              modal.style.display = "none";
+                                                              }) 
+                                                  }
+                                                }
+                                              }),
+                                        passwordID: "Password:",
+                                        passwordRepeatID: "Repeat password:",
+                                        oldPasswordID: "Old Password",
+                                        oldPassword: new Input({
+                                                class: "input_common oldPassword",
+                                                type: "text",
+                                        }),
+                                        password: new Input({
+                                                class: "input_common change_password password passwordValid",
+                                                type: "text",
+                                        }),
+                                        passwordRepeat: new Input({
+                                                class:"input_common change_password_repeate password",
+                                                type: "text",
+                                        }),
                                 })
                                 
                         }
