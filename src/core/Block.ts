@@ -91,7 +91,7 @@ export default class Component {
 		return { children, props };
 	}
 
-	compile(template, props) {
+	compile(template, props?) {
 		if(typeof(props) == 'undefined')
 			props = this._props;
 

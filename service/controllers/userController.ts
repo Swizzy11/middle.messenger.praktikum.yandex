@@ -34,7 +34,8 @@ export class UserConroller {
     
     async updateAvatar(form:FormData) {
         try {
-         await this.api.uploadChatAvatar(form)
+         const userInfo:any = await this.api.uploadChatAvatar(form)
+         store.set("user.avatar", userInfo.avatar)
         }
         catch(e) {
             console.log(e.message)

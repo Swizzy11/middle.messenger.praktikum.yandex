@@ -16,8 +16,7 @@ export default class Input extends Block {
       super("div", props);
     }
   
-    render() {
-     //@ts-ignore   
+    render() {  
       return this.compile(tpl);
     }
   } 

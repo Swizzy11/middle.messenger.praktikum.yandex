@@ -9,16 +9,18 @@ import { Connect } from "../../../../../service/store";
 import Store from "../../../../../service/store";
 import ChatConroller from "../../../../../service/controllers/chatController";
 import chatsListBody from "../../../../components/feedListBody/tmp";
+import { Signin } from "../../../../../service/interfaceAPI";
 const router = new Router("#root")
 
 export default Connect(
         Login,
         (state) => {
-                if(Store.getState() === undefined) {
-                        const userApi = new AutheficationController
-                        const userInfo = userApi.userInfo()
-                        Store.set("user", userInfo)
-                }
+                
+                // if(Object.entries(Store.getState()).length !== 0) {
+                //         const userApi = new AutheficationController
+                //         const userInfo = userApi.userInfo()
+                //         Store.set("user", userInfo)
+                // }
                return {
                 login: new Input({
                         type: "text",
@@ -46,21 +48,28 @@ export default Connect(
                         type:"submit",
                         events: {
                                 click: (e: MouseEvent) => {
-                                        const loginData:any = {};
+                                        const loginData:Signin = {
+                                                login: "",
+                                                password: ""
+                                        };
                                         validator("login");
-                                        validator("password");
-                                        if(validator("login") === true 
-                                        && validator("password") === true) {
-                                                document.querySelectorAll("form input").forEach((e: HTMLInputElement)=>{
-                                                    loginData[e.name] = e.value;     
-                                                })
+                                        if(validator("login") === true ) {
+                                                
+                                                let login:any = document.querySelector("form div .login")
+                                                let password:any = document.querySelector("form div .password")
+                                                loginData[login.name] = login.value
+                                                loginData[password.name] = password.value
+                                                
                                                 const au = new AutheficationController()
-                                                au.signIn(loginData)
+
+                                                setTimeout(()=> au.signIn(loginData), 150)
+                                                setTimeout( ()=> {
+                                                        const chats = new ChatConroller()
+                                                        chats.getChats()}
+                                                        , 1000)
                                                 
-                                                setTimeout( ()=>{const chats = new ChatConroller()
-                                                chats.getChats()}, 300)
+                                                setTimeout(()=> chatsListBody(), 2000)
                                                 
-                                                setTimeout(()=>chatsListBody(), 2000)
                                         }
                                 }
                         }

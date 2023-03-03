@@ -11,7 +11,6 @@ export default class UnderlineName extends Block {
     }
   
     render() {
-      //@ts-ignore
       return this.compile(tpl);
     }
   } 

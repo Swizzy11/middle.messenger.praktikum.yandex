@@ -5,7 +5,7 @@ export interface ITEST {
   name: string;
   text: string;
   events?: {
-    click: (e: any) => void;
+    click: (e: Event) => void;
 }
 }
 
@@ -14,8 +14,7 @@ export default class chatsListBodyTEST extends Block {
       super("div", props);
     }
   
-    render() {
-     //@ts-ignore   
+    render() { 
       return this.compile(tpl);
     }
   } 

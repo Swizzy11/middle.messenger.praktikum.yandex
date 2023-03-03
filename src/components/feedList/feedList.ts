@@ -13,7 +13,6 @@ export default class FeedList extends Block {
     }
   
     render() {
-      //@ts-ignore
       return this.compile(tpl);
     }
   } 

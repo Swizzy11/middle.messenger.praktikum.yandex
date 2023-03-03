@@ -15,12 +15,9 @@ export class ChatAPI extends BaseAPI {
         return http.post("/chats", data)
     }
 
-    deleteChatByID(id:number): Promise<unknown> {
+    async deleteChatByID(id:number): Promise<unknown> {
         return http.delete("/chats", {
-            headers: {
-                "content-type": "application/json"
-            },
-            body: {chatId: id,}
+            chatId: id,
         })
     }
 

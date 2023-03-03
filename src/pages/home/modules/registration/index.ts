@@ -92,9 +92,9 @@ export default Connect(
                                                 if(buttonValidator()) {
                                                     e.preventDefault();
                                                     const regData = buttonValidator();
-                                                    console.log(regData)
                                                     const reg = new AutheficationController();
-                                                    reg.signUp(regData)
+                                                    reg.signUp(regData);
+                                                    router.go("/messanger")
                                                 };
                                         }
                                 }

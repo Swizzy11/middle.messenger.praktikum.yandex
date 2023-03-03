@@ -4,7 +4,7 @@ import tmp from "./tmp";
 export interface IButton {
   classModalClose?: string;
   events?: {
-    click: (e: any) => void;
+    click: (e: Event) => void;
   }
 }
 export default class buttonCloseModal extends Block {
@@ -13,7 +13,6 @@ export default class buttonCloseModal extends Block {
     }
   
     render() {
-      //@ts-ignore
       return this.compile(tmp);
     }
   } 

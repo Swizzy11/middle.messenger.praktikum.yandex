@@ -18,8 +18,8 @@ export class ChatConroller {
         try{
         await this.api.createChat(title);
         }
-        catch(e) {
-            console.log(e.message)
+        catch(error) {
+            console.log(error.message)
         }  
     }
 
@@ -28,8 +28,8 @@ export class ChatConroller {
             const chats = await this.api.getChats(); 
             store.set(`chats.message`, chats)
         }
-        catch(e) {
-            console.log(e.message)
+        catch(error) {
+            console.log(error.message)
         }
     }
 
@@ -37,8 +37,18 @@ export class ChatConroller {
         try{
         this.api.addUserToChat(data)
         }
-        catch(e) {
-            console.log(e.message)
+        catch(error) {
+            console.log(error.message)
+        }
+    }
+
+
+    async deleteChatByID(id:number){
+        try{
+            this.api.deleteChatByID(id)
+        }
+        catch(error) {
+            console.log(error.message)
         }
     }
 
@@ -46,8 +56,8 @@ export class ChatConroller {
         try{
         this.api.deleteUserToChat(data)
         }
-        catch(e) {
-            console.log(e.message)
+        catch(error) {
+            console.log(error.message)
         }
     }
 
@@ -57,8 +67,8 @@ export class ChatConroller {
        const token = await this.api.getToken(id)
        store.set("tokenSet", token)
         }
-        catch(e) {
-            console.log(e.message)
+        catch(error) {
+            console.log(error.message)
         }
     }
 }

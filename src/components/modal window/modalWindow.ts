@@ -7,7 +7,7 @@ import { buttonCloseModal } from "../buttonAdd/butoonCloseModal";
 export interface IModalWindow {
   child?:string;
   events?: {
-    click: (e: any) => void;
+    click: (e: Event) => void;
   }
 }
 export default class buttonAddChat extends Block {
@@ -19,7 +19,6 @@ export default class buttonAddChat extends Block {
     }
   
     render() {
-      //@ts-ignore
       return this.compile(tmp);
     }
   } 

@@ -21,15 +21,14 @@ import Store from "../service/store"
 import addValue from "./utils/heplerApp/addValue"
 import ChatConroller from "../service/controllers/chatController"
 
+
+
 if (performance.navigation.type === 1) {  
         setTimeout(()=>{
-                const chats = new ChatConroller()
-                chats.getChats();
-                Store.set("current", "");
                 if(window.location.pathname === "/settings"){
                         addValue()
                 }
-        },50 );
+        },150 );
         
 }
 const router = new Router("#root")

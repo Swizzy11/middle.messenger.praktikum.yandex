@@ -7,7 +7,12 @@ export interface IAvatar {
   class: string;
   accept: string;
   formClassAvatar:string,
-  userPhoto: string
+  userPhoto: string,
+  buttonUpdataAvatar:any,
+  formId:string,
+  events?: {
+    submit: (e: Event) => void;
+  }
 }
 
 export default class Input extends Block {
@@ -16,7 +21,6 @@ export default class Input extends Block {
     }
   
     render() {
-     //@ts-ignore   
       return this.compile(tpl);
     }
   } 

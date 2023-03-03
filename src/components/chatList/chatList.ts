@@ -6,13 +6,12 @@ export interface IChatList {
   messageForPeople: string,
   date1: string,
 }
-export default class ChatList extends Block<IChatList> {
+export default class ChatList extends Block {
     constructor(props:IChatList) {
       super("div", props);
     }
   
-    render() {
-        
+    render() {  
       return this.compile(tmp);
     }
   } 

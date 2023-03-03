@@ -2,7 +2,7 @@ import Store from './Store';
 
 export default function connect(Component, mapStateToProps) {
 	return class extends Component {
-		constructor(tag, props = {}) {
+		constructor(tag:string, props = {}) {
 			
 			const store = new Store();
 

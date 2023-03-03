@@ -12,7 +12,6 @@ export default class errorMessage extends Block {
     }
   
     render() {
-      //@ts-ignore
       return this.compile(tpl);
     }
   } 

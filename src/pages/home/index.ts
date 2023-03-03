@@ -18,7 +18,6 @@ import chatsListBody from "../../components/feedListBody/tmp";
 import { buttonAddChat } from "../../components/buttonAdd/buttonAddChat";
 import { buttonSendInfo } from "../../components/buttonSendInfo";
 import { buttonCloseModal } from "../../components/buttonAdd/butoonCloseModal";
-import getOldMessage from "../../components/chatMessage/oldMessage/oldMessage";
 
 const router = new Router("#root")
 
@@ -26,26 +25,26 @@ const router = new Router("#root")
 export default Connect(
         mainPage,
         (state) => {
-                setTimeout(()=>chatsListBody(), 100)
-                        if (performance.navigation.type === 1) {  
-                                
-                        setTimeout(()=>chatsListBody(), 100)
-                        } 
-                    
-                
+
+                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 800)} 
+
                 const chat = new ChatConroller()
-                //@ts-ignore
-                if(Store.getState() === undefined){const userId = Store.getState().user.id;}
-                //@ts-ignore
-                if(Store.getState().chats !== undefined){
-                        //@ts-ignore
+                
+                if(Store.getState().user !== undefined) {const userId = Store.getState().user.id;}
+
+                let avatarlink;
+                if(Store.getState().user.avatar !== "null") {
+                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
+                  }else {
+                        avatarlink = ""
+                  }
+                if(Store.getState().chats !== undefined) {
+
                         const userId:any = Store.getState().user.id
+
                         return {
-                                //@ts-ignore
-                                avatar:`<img class="user_photo_chat" >`,
-        
+                                avatar: `<img class="user_photo_chat" src="${avatarlink}">`,
                                 userName: new UnderlineName({
-                                        //@ts-ignore
                                        text: `${Store.getState().user.first_name} ${Store.getState().user.second_name}`
                                 }),
                                 buttonProfile: new Button({
@@ -53,8 +52,6 @@ export default Connect(
                                         child:"profile",
                                         events: {
                                                 click: () => {
-                                                    const profile = new AutheficationController();
-                                                    profile.userInfo();
                                                     router.go("/profile")
                                                     
                                                 }
@@ -82,37 +79,45 @@ export default Connect(
                                         child: ``,
                                         type: "button",
                                         events:{
-                                                click: (e) => {
+                                                click: (e: Event) => {
                                                         e.preventDefault()
                                                         console.log("Загрузить изображение?")
                                                 }
                                         }
                                     }),
-                        
+                                    
+                                buttonrefreshChat: new Button({
+                                className: "btn_logout",
+                                child: "обновить чаты",
+                                events:{
+                                        click: (e:Event) => {
+                                                e.preventDefault();
+                                                const chats = new ChatConroller()
+                                                chats.getChats()
+                                                setTimeout( ()=>{chatsListBody()}, 500)
+                                        }
+                                }
+                                }),
                                 buttonSend: new Button({
                                         className: "btn btn_send",
                                         child: ``,
                                         type: "button",
                                         events:{
-                                                click: (e) => {
+                                                click: (e:Event) => {
                                                         e.preventDefault()
                                                         if(validator("input_message") === true){    
                                                                         const elem = <HTMLInputElement>document.querySelector(".input_message")
                                                                 
                                                                         const text = elem.value;
                                                                         let chatId: number;
-                                                                        //@ts-ignore
+
                                                                         if(Store.getState().current === "" || Store.getState().current === undefined) {
                                                                                 alert("Выберите чат!");
                                                                         }else {
-                                                                               //@ts-ignore
+                                                                               
                                                                                 chatId = Store.getState().current;
-                                                                                //@ts-ignore
-                                                                                const token = Store.getState().tokenSet.token
-                                                                                //@ts-ignore
-                                                                                const name = Store.getState().user.id;
-                                                                                //@ts-ignore
                                                                                 let socket = Store.getState().socket;
+
                                                                                 if(elem) {
                                                                                         socket.send(JSON.stringify({
                                                                                                 content: text,
@@ -124,7 +129,6 @@ export default Connect(
                                                                                                         behavior: 'smooth'
                                                                                                 });
                                                                                                 elem.value = ""
-                                                                                        //@ts-ignore
                                                                                                 sendMessage(text, ".chat");          
                                                                                         }
                                                                         }
@@ -154,7 +158,7 @@ export default Connect(
                                                 child: "Добавить чат",
                                                 class: "myBtn",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                     let modal:any = document.getElementById('myModalChatAdd');
                                                     modal.style.display = "block";
@@ -166,7 +170,7 @@ export default Connect(
                                                 className: 'btn btn_add',
                                                 child: "Add",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                       const nameChatInput = <HTMLInputElement>document.querySelector(".add_chat_input")
                                                       const chats = new ChatConroller();
@@ -210,7 +214,7 @@ export default Connect(
                                                 child: "Добавить пользователя в чат",
                                                 class: "myBtn",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                     let modal:any = document.getElementById('myModalUserAdd');
                                                     modal.style.display = "block";
@@ -222,7 +226,7 @@ export default Connect(
                                                 className: 'btn btn_add',
                                                 child: "Add",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                         const nameChatInput = document.querySelectorAll(".add_chat_user")
                                                         let userId;
@@ -244,7 +248,7 @@ export default Connect(
                                         closeModal: new buttonCloseModal({
                                                 events: {
                                                   click: () => {
-                                                    let modal:any = document.getElementById('myModalUserAdd');               
+                                                    let modal = <HTMLElement>document.getElementById('myModalUserAdd');               
                                                     let modalClose = document.getElementsByClassName("close")
                                                     let span:Node;
 
@@ -276,7 +280,7 @@ export default Connect(
                                                 child: "Удалить пользователя из чат",
                                                 class: "myBtn_delete",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                     let modal:any = document.getElementById('myModalUserDelete');
                                                     modal.style.display = "block";
@@ -288,7 +292,7 @@ export default Connect(
                                                 className: 'btn btn_delete',
                                                 child: "DELETE",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                         const nameChatInput = document.querySelectorAll(".delete_chat_user")
                                                         let userId;

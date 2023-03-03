@@ -14,31 +14,39 @@ export class AutheficationController {
         try{
         const response:any = await this.api.loginApi(data);
 
-        if(response["reason"] === "Login or password is incorrect") {
+            if(response === "OK" ) {
+                const userInfo = await this.api.userInfo();
+                console.log(userInfo)
+                store.set("user", userInfo)
+                router.go("/messanger");
+        
+            }else if(response["reason"] === "User already in system") {
+                const error:any =  document.querySelector(".error_password");
+                const userInfo = await this.api.userInfo();
+                store.set("user", userInfo)
+                console.log(store.getState())
+                setTimeout(()=>{
+                    error.innerHTML = ""
+                    router.go("/messanger"); 
+                    }, 800)
+    
+                return;
+                
+            }
+        else if(response["reason"] === "Login or password is incorrect") {
             const error:any =  document.querySelector(".error_password");
             error.innerHTML = "Неправильный логин или пароль";
             return;
-        }else if(response["reason"] === "User already in system") {
-            const error:any =  document.querySelector(".error_password");
-            error.innerHTML = "Произошла ошибка";
-            setTimeout(()=>{
-                error.innerHTML = ""
-                router.go("/error404"); 
-                }, 800)
-
-            return;
-            
-        }else if(response !== "OK") {
+        }
+        else if(response !== "OK") {
             router.go("/login");
             return;
         }
-
-        const userInfo = await this.api.userInfo()
-        store.set("user", userInfo)
-        router.go("/messanger");
+            
+        
     }
     catch(e) {
-        console.log(e.message)
+        console.log(e)
     }
     }
 
@@ -50,10 +58,6 @@ export class AutheficationController {
             error.innerHTML = "Этот пользователь уже зарегистрирован";
             return;
         }
-
-
-        const userInfo = await this.api.userInfo()
-        store.set("user", userInfo)
         router.go("/messanger");
     }
     catch(e) {
@@ -74,6 +78,16 @@ export class AutheficationController {
     async userInfo() {
         try {
         await this.api.userInfo();
+        }
+        catch(e) {
+            console.log(e.message)
+        }
+    }
+
+    async userInfoAvatar() {
+        try {
+        const avatar:any = await this.api.userInfo();
+        store.set("user.avatar", avatar.avatar)
         }
         catch(e) {
             console.log(e.message)

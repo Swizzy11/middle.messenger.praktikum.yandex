@@ -74,11 +74,17 @@ class HTTPTransport {
 
           xhr.onload = function () {
               let resp;
-              if (~xhr?.getResponseHeader('Content-Type')?.indexOf('application/json')!) { 
+              try{
+                if (~xhr?.getResponseHeader('Content-Type')?.indexOf('application/json')!) { 
                 resp = JSON.parse(xhr.response)
               } else {
                   resp = xhr.response;
               }
+            }catch(error) {
+                console.log("Ошибка", error)
+            }
+
+
               if (xhr.status === 200) {
                   resolve(resp);
 
@@ -101,7 +107,6 @@ class HTTPTransport {
               xhr.send();
           } else {
               if (data instanceof FormData) {
-                  xhr.setRequestHeader("Content-Type", "multipart/form-data");
                   xhr.send(data);
               } else {
                   xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');

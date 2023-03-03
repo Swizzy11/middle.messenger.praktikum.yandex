@@ -1,5 +1,5 @@
 import EventBus from "../../src/core/eventBus";
-import set from "../../src/utils/heplerApp/set";
+import set, { Indexed } from "../../src/utils/heplerApp/set";
 
 
 export default class Store extends EventBus {
@@ -8,7 +8,7 @@ export default class Store extends EventBus {
 	static _instance;
 	static STORE_NAME = 'myAppStore';
 
-	_state = { };
+	_state:Indexed = { };
 
 	constructor() {
 		

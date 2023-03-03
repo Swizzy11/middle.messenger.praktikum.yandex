@@ -1,9 +1,10 @@
 
-export default function newMessage(text:string, time: string, friend_id:any) {
+export default function newMessage(text:string, time: string, friend_id:unknown) {
 
     let chat = <HTMLElement>document.querySelector(`.chat`)
     let newTime = new Date(time)
     let p = document.createElement("p")
+    
     p = document.createElement("p")
     p.innerHTML  = `
     <div class="friend_message">

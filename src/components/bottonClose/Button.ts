@@ -8,7 +8,7 @@ export interface IButtonClose {
   placeholder?: string;
   child?: string;
   events?: {
-    click: (e: any) => void;
+    click: (e: Event) => void;
   }
 }
 export default class Button extends Block {
@@ -17,7 +17,6 @@ export default class Button extends Block {
     }
   
     render() {
-      //@ts-ignore
       return this.compile(tmp);
     }
   } 

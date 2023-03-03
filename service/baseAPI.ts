@@ -1,4 +1,3 @@
-import HTTPTransport from "../src/utils/HTTPTransport";
 export class BaseAPI {
 
     public create?(data: any): Promise<any> {

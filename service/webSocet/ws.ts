@@ -7,7 +7,7 @@ export interface wsChat {
 }
 
 
-export default function wSocket(userID, chatID, token) {
+export default function wSocket(userID:wsChat, chatID:wsChat, token:wsChat) {
     const ws = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userID}/${chatID}/${token}`)
 
     ws.addEventListener("open" , (e) => {
@@ -38,9 +38,8 @@ export default function wSocket(userID, chatID, token) {
         store.set(`lastMessage`, lastMessage)
     });
 
-    ws.addEventListener("error", event => {
-        //@ts-ignore
-        console.log("Ошибка", event.message)
+    ws.addEventListener("error", (event:any) => {
+        console.log(`Ошибка | ${event.message}`)
     })
 
     // const sendMessage = (text:string) => {
@@ -96,7 +95,6 @@ export default function wSocket(userID, chatID, token) {
         
         
 //         this.socket.addEventListener("error", event => {
-//             //@ts-ignore
 //             console.log("Ошибка", event.message)
 //         })
         

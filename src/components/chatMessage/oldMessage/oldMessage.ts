@@ -4,10 +4,10 @@ import Store from "../../../../service/store"
 export default function getOldMessage(name:string, text:string, blockID: string, friend_id: string, message_time:string) {
 
     let chat = <HTMLElement>document.querySelector(`${blockID}`)
-    //@ts-ignore
     const userId = Store.getState().user.id
     let time = new Date(message_time)
     let p: any;
+    
     if(friend_id === userId) {
         p = document.createElement("p")
         p.innerHTML  = `

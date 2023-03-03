@@ -16,6 +16,9 @@ import { buttonSendInfo } from "../../../../components/buttonSendInfo"
 import comparisonPassword from "../../../../utils/heplerApp/passwordComparison"
 import { errorMessage } from "../../../../components/errorMessage"
 import validatorPassword from "../../../../utils/validatorPassword"
+import addValue from "../../../../utils/heplerApp/addValue"
+import AutheficationController from "../../../../../service/controllers/authController"
+import chatsListBody from "../../../../components/feedListBody/tmp"
 
 
 const router = new Router("#root")
@@ -25,7 +28,14 @@ const router = new Router("#root")
 export default Connect(
         EditProfile,
         (state) => {
-                if(Store.getState() !== undefined) {
+
+                let avatarlink;
+                if(Store.getState().user.avatar !== "null") {
+                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
+                  }else {
+                        avatarlink = ""
+                  }
+                if(Object.entries(Store.getState()).length !== 0) {
                         return {
 
                                 avatar: new Avatar({
@@ -34,8 +44,29 @@ export default Connect(
                                         class: "avatar",
                                         name: "avatar",
                                         accept: "image/*",
-                                        //@ts-ignore
-                                        userPhoto: "",
+                                        userPhoto: `${avatarlink}`,
+                                        formId: "avatarUp",
+                                        buttonUpdataAvatar: new buttonSendInfo({
+                                                type: "button",
+                                                className: "avatarUpdate",
+                                                child: "Изменить",
+                                        }),
+                                        events: {
+                                                submit: (e:Event) => {
+                                                        e.preventDefault()
+                                                        const userForm = <HTMLFormElement>document.getElementById("avatarUp")
+                                                        
+                                                        const form = new FormData(userForm)
+                                                        
+                                                        const editAvatar = new UserConroller()
+                                                        editAvatar.updateAvatar(form);
+                                                        const authController = new AutheficationController()
+                                                        setTimeout(()=>{
+                                                        authController.userInfoAvatar()
+                                                        , 500})
+                                                        setTimeout(()=>addValue(), 1000)  
+                                                }
+                                        }
                                 }),
         
                                 userName: new Input({
@@ -112,7 +143,7 @@ export default Connect(
                                         child: "Сохранить",
                                         type: "button",
                                         events: {
-                                                click: (e) => {
+                                                click: (e:Event) => {
                                                         e.preventDefault();
                                                         const ediData:any = {};
         
@@ -130,12 +161,9 @@ export default Connect(
                                                                         ediData[e.name] = e.value;     
                                                                 })
                                                                 const editInfo = new UserConroller()
-                                                                const editAvatar = new UserConroller()
-        
-                                                                // const userForm = <HTMLFormElement>document.querySelector(".avatarForm")
-                                                                // const form = new FormData(userForm)
-        
-                                                                // editAvatar.updateAvatar(form)
+                                                                
+                                                                setTimeout(()=>addValue(), 1000)
+                                                                
                                                                 editInfo.updateUserData(ediData)
                                                         }                    
                                         }
@@ -147,7 +175,8 @@ export default Connect(
                                         type:"button",
                                         events: {
                                                 click: () => {
-                                                        router.go("/messanger")
+                                                        router.go("/messanger");
+                                                        setTimeout(()=> chatsListBody(), 1000)
                                                 }
                                         }
                                 }),
@@ -161,7 +190,7 @@ export default Connect(
                                                 child: "Изменить пароль",
                                                 class: "myBtn_changePassword",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                     let modal:any = document.getElementById('changePassword');
                                                     modal.style.display = "block";
@@ -174,7 +203,7 @@ export default Connect(
                                                 className: 'btn btn_add btn_sendPassword',
                                                 child: "Change",
                                                 events: {
-                                                  click: (e) => {
+                                                  click: (e:Event) => {
                                                     e.preventDefault()
                                                     
                                                         const modal:any = document.getElementById('changePassword');
@@ -189,7 +218,7 @@ export default Connect(
                                                                         if(comparisonPassword() === true) {
                                                                                 errorMessage.innerHTML = ""
                                                                                 const userController = new UserConroller();
-                                                                                //@ts-ignore
+                                                                                
                                                                                 userController.updatePassword(oldPassword.value, password.value)
                                                                                 modal.style.display = "none";
                                                                         }else {

@@ -19,8 +19,8 @@ export class AuthAPI extends BaseAPI {
     }
     
     
-    async userInfo():Promise<UserInfo> {
-        return http.get("/auth/user", {});
+    async userInfo() {
+        return http.get("/auth/user");
     }
  
     

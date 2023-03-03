@@ -9,18 +9,14 @@ function chatsListBody() {
     if(feed_body !== null){
         feed_body.innerHTML = ""
     }
-    //@ts-ignore
+
     if(Store.getState().chats !== undefined){
-        //@ts-ignore
+
     const userId = Store.getState().user.id;
     const chat = new ChatConroller()
-    //@ts-ignore
-    
-    //@ts-ignore
     const chats = Store.getState().chats.message;
     const lengthChats = Object.keys(chats).length
-    const btn_send = document.querySelector(".btn_send");    
-
+    const root = <HTMLElement>document.querySelector("#root")
 
         let token;
         let socket;
@@ -29,15 +25,13 @@ function chatsListBody() {
         
         let lastMessage;
 
-        //@ts-ignore
         if(Store.getState().chats.message[i].last_message === null) {
             lastMessage = ""
         }else{ 
-        //@ts-ignore
             lastMessage = Store.getState().chats.message[i].last_message.content
         }
 
-        //@ts-ignore
+        
         const title = Store.getState().chats.message[i].title
 
         let feed_element = document.createElement("div");
@@ -57,23 +51,41 @@ function chatsListBody() {
         message_you.className = "message_you"
         message_you.textContent = lastMessage
 
+        let delete_chat = document.createElement("div")
+        delete_chat.className = "delete_chat"
+        delete_chat.textContent = "x"
+
         text_info.appendChild(name_people)
         text_info.appendChild(message_you)
 
         feed_element.appendChild(photo)
         feed_element.appendChild(text_info)
-        
-        feed_element.addEventListener("click", ()=> {
-                //@ts-ignore
+
+        feed_element.appendChild(delete_chat)
+
+        delete_chat.addEventListener("click", ()=>{
+            let confirm_message = confirm(`Удалить чат ${title}?  Не забудь после нажать на кнопку обновить чаты`)
+            const chatId:any = Store.getState().chats.message[i].id;
+
+            if(confirm_message === true) {
+
+                chat.deleteChatByID(chatId)
+                console.log(`Чат: ${title} ID:${chatId} удалён`)
+            }else {
+                console.log(`Чат: ${title} не удалён`)
+            }
+        })
+
+
+        name_people.addEventListener("click", ()=> {
                 const chatId:any = Store.getState().chats.message[i].id;
-                //@ts-ignore
                 const currentChat:any = Store.getState().chats.message[i];
 
                 setTimeout(()=>{let chatName = <HTMLElement>document.querySelector(".chat_name")
-                //@ts-ignore
+                
                 chatName.innerHTML += `Chat: ${Store.getState().chats.message[i].title}`}, 1000)
 
-                //@ts-ignore
+                
                 if(Store.getState().currentChat !== "" || Store.getState().currentChat !== undefined) {
                     Store.set("current", chatId);
                 }
@@ -85,11 +97,11 @@ function chatsListBody() {
                 
                
             setTimeout(()=>{
-                //@ts-ignore
+                
                 token = Store.getState().tokenSet.token;
                 socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
                 Store.set("socket", socket)
-                //@ts-ignore
+                
                 socket.addEventListener("open", () => {
               
                     socket.send(
@@ -110,37 +122,39 @@ function chatsListBody() {
                   });
                   
                 socket.addEventListener("message", event => {
-                                
+                            try{
                                 let lastMessage;
+                                const data = JSON.parse(event.data);
                                 if(event.data === undefined || event.data === "WS token is not valid") {
                                     lastMessage = ""
-                                }else if(JSON.parse(event.data).type === "user connected") {
-                                    console.log(JSON.parse(event.data).type);
-                                }else if(JSON.parse(event.data).type === "message"){
                                     
-                                    let name = JSON.parse(event.data).user_id
-                                    let message = JSON.parse(event.data).content;
-                                    let time = JSON.parse(event.data).time;
+                                }else if(data.type === "user connected") {
+                                    console.log(data.type);
+                                }else if(data.type === "message"){
+                                    
+                                    let name = data.user_id
+                                    let message = data.content;
+                                    let time = data.time;
 
-                                    //@ts-ignore
+                                    
                                     if(Store.getState().user.id !== name){newMessage(message,time,name)}
                                 }
                                 else {
                                     Store.set("lastMessage", "")
                                     
-                                    lastMessage = JSON.parse(event.data)
+                                    lastMessage = data
                                     Store.set(`lastMessage`, lastMessage);
-                                    //@ts-ignore
+                                   
                                     const chats = Store.getState().lastMessage;
                                     const lengthChats = Object.keys(chats).length
 
                                     for(let i = 0; i < lengthChats; i++) {
-                                        //@ts-ignore
+                                        
                                         let oldMessage = lastMessage;
                                         let name:string; 
-                                        //@ts-ignore
+                                      
                                         if(lastMessage[i] !== undefined) {
-                                            //@ts-ignore
+                                         
                                             name = lastMessage[i].user_id
                                         }
                                         else{
@@ -149,17 +163,21 @@ function chatsListBody() {
                                         if(oldMessage[i] === undefined) {
                                             return
                                         }
-                                        //@ts-ignore
+                                     
                                         let friend_id = lastMessage[i].user_id;
-                                        //@ts-ignore
+                                       
                                         let message_time = lastMessage[i].time
                                         getOldMessage(name, oldMessage[i].content, ".chat",friend_id, message_time);
                                             
                                     }
                                 }
-                                });
+                            }catch(error) {
+                                console.log("error", error)
+                            }
+
+                        });
                             
-                 //@ts-ignore
+               
                 },
                             
             100)

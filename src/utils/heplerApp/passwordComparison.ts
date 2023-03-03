@@ -1,7 +1,7 @@
 
 export default function comparisonPassword() {
-    let password:any = document.querySelector(".change_password");
-    let passwordRepeate:any = document.querySelector(".change_password_repeate");
+    let password = <HTMLInputElement>document.querySelector(".change_password");
+    let passwordRepeate = <HTMLInputElement>document.querySelector(".change_password_repeate");
 
     if(password.value === passwordRepeate.value) {
         return true
