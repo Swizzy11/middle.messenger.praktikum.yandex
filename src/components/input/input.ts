@@ -1,9 +1,9 @@
-import tmp from "./tmp.hbs";
+import tpl from "./tpl";
 import Block from "../../core/Block";
 
 export interface IInput {
   type: string;
-  name: string;
+  name?: string;
   class: string;
   placeholder?: string;
   events?: {
@@ -11,18 +11,12 @@ export interface IInput {
 }
 }
 
-export default class Input extends Block<IInput> {
+export default class Input extends Block {
     constructor(props:IInput) {
       super("div", props);
     }
   
-    render() {
-        
-      return this.compile(tmp,{
-        type: this.props.type,
-        name: this.props.name,
-        class: this.props.class,
-        placeholder: this.props.placeholder,
-      });
+    render() {  
+      return this.compile(tpl);
     }
   } 

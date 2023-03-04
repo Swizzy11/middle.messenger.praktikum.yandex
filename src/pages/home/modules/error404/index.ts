@@ -1,21 +1,29 @@
-import tpl from './index.hbs';
-import Block from "../../../../core/Block";
+import AutheficationController from "../../../../../service/controllers/authController";
+import { Connect } from "../../../../../service/store";
+import Button from "../../../../components/buttonSendInfo/Button";
+import Router from "../../../../utils/router"
 
-import { IButton } from "../../../../components/button/Button";
+import Error404 from "./error404Page";
 
-type PropsType = {
-    buttonBack: Block<IButton>,
-}
 
-export default class Error404 extends Block<PropsType> {
-    constructor(props:PropsType) {
-        super("div", props);
-        
-    }
-    render() {
-        return this.compile(tpl,{
-            buttonBack: this.props.buttonBack
-        })
-    }
-}
+const router = new Router("#root")
 
+export default Connect(
+        Error404,
+        (state) => {
+                return {
+                        buttonBack: new Button({
+                                className:"btn_404",
+                                child: "Вернуться на главную?",
+                                events: {
+                                        click: () => {
+                                                const logout = new AutheficationController();
+                                                logout.logout()
+                                                setTimeout(()=>router.go("/login"), 500)
+                                                
+                                        }
+                                }
+                        })
+                }
+        }
+)

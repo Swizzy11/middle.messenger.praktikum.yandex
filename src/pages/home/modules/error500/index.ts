@@ -1,21 +1,26 @@
-import tpl from './index.hbs';
-import Block from "../../../../core/Block";
+import Button from "../../../../components/buttonSendInfo/Button";
+import { render } from "../../../../utils/renderDOM";
+import Router from "../../../../utils/router"
 
-import { IButton } from '../../../../components/button/Button';
-
-type PropsType = {
-    buttonBack: Block<IButton>,
-}
+import Error500 from "./error500Page";
+import { Connect } from "../../../../../service/store";
 
 
-export default class Error500 extends Block<PropsType> {
-    constructor(props:PropsType) {
-        super("div",props);
-        
-    }
-    render() {
-        return this.compile(tpl,{
-            buttonBack: this.props.buttonBack
-        })
-    }
-}
+const router = new Router("#root");
+
+export default Connect(
+        Error500,
+        (state) => {
+                return {
+                        buttonBack: new Button({
+                                className:"btn_404",
+                                child: "Вернуться на главную?",
+                                events: {
+                                        click: () => {
+                                            router.go("/login")
+                                        }
+                                }
+                        })
+                }
+        }
+)

@@ -1,7 +1,7 @@
 import validator from "./validator";
 
 function buttonValidator() {
-    const obj = {};
+    const obj:any = {};
     validator("email");
     validator("login")
     validator("password");
@@ -16,12 +16,14 @@ if(validator("email") === true
 && validator("first_name") === true
 && validator("second_name") === true) { 
     document.querySelectorAll("form input").forEach((e: any): void=> {
+        console.log(e.value)
         obj[e.name] = e.value
     })
 }
    if(Object.keys(obj).length !== 0) { 
-    console.log(obj)
+    return obj
 }
+return false
 }
 
 export default buttonValidator;

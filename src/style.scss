@@ -3,7 +3,7 @@ $font-size-small: small;
 $bg-color-zero:rgba(0, 0, 0, 0);
 $message-color-border: #ffa33a70;
 #root {
-    width: 100%;
+    width: 99%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -14,29 +14,56 @@ $message-color-border: #ffa33a70;
     font-family: CALIBRI;
 }
 
+input{
+    outline: none;
+}
+
+form {
+    margin-block-end: 0 ;
+}
+
 .btn {
     border: none;
     cursor: pointer;
 }
 .btn_close {
-    background-color: $bg-color-zero;
-    margin-left: 85%;
+    width: 20px;
+    height: 20px;
+    background-image: url("../static/icons/x-circle.svg") ;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
 }
+
+div .btn_close {
+    width: 100%;
+    background-color: $bg-color-zero;
+}
+
+
 
 .input_common {
     height: 3vh;
     width: 15vw;
-    border-radius: 8px;
-    border:1px solid #c07a2b;
+    border-radius: 2%;
+    border: none;
+    border-bottom:1px solid #c07a2b;
     background-color: $primary-color;
 }
 
 .user_photo {
-    width: 5vw;
-    height: 8vh;
-    background-color: $primary-color;
-    border:1px solid #c07a2b;
-    border-radius: 6px;
+    margin-left: 2%;
+    width: 30%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.user_photo_chat{
+    margin-left: 2%;
+    width: 40px;
+    height: 90%;
+    border-radius: 100%;
 }
 .underline_name {
     text-decoration: underline;
@@ -58,7 +85,6 @@ $message-color-border: #ffa33a70;
 }
 /* menu */
 
-
 .nav {
     visibility: hidden;
     width: 8%;
@@ -72,12 +98,30 @@ $message-color-border: #ffa33a70;
     border: 1px solid black;
     padding: 2% 2%;
     right: 3%;
-    bottom: 40%;
+    bottom: 5%;
     padding-inline-start: 0;
 }
 .nav_hide {
     visibility: visible;
     opacity: 1;
+}
+.nav button {
+    background-color: rgba(3, 1, 0, 0);
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 2px;
+    margin: 1px;
+}
+.nav button:hover {
+    background-color: rgba(8, 3, 0, 0.116);
+    border-radius: 4px;
+    transition: .4s;
+    font-size: medium;
+}
+.nav button:active,
+    button:focus {
+    outline: none;
 }
 .list_menu {
     list-style-type: none;
@@ -85,87 +129,68 @@ $message-color-border: #ffa33a70;
 
 
 
+@keyframes ani {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
 /* block home */
 
 .block {
-    width: 99vw;
-    height: 98vh;
+    width: 100%;
+    height: 99%;
 }
+
 .messager_home_page {
-    width: 95%;
     height: 95%;
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
 }
+
  
 .header_message {
-    width: 100%;
     height: 6%;
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
+    display:  flex;
+
+
+            .name_chat {
+                margin-left: 10%;
+            }
+}
+
+.chat_name {
+    margin-top: 1%;
+    margin-left: 70%;
 }
 .message_body {
-    width: 100%;
     height: 100%;
 }
 .chat {
     height: 90%;
-    overflow:scroll;
-    overflow-x:hidden;
+    overflow-y:scroll;
     scrollbar-width: thin;
     scrollbar-color: hsl(0 0% 50%);
     display: flex;
     align-items: flex-end;
+    flex-direction: column;
+}
+
+.chat::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat::-webkit-scrollbar-track {
+    background-color: #ffa33a42;
+}
+.chat::-webkit-scrollbar-thumb {
+    background-color:#ffa33a59;
 }
 .message_list {
     display: flex;
     width: 80vw;
     margin-top: 10px;
     margin-bottom: 15px;
-
-        .you_message {
-            width: 40%;
-            background-color: #ffa33abe;
-            border: 1px solid $message-color-border;
-            border-radius: 10px;
-            border-bottom-right-radius:0px;
-            margin-left: 16%;
-            align-self: flex-end;
-        }
-        .friend_message {
-            width: 40%;
-            background-color: #ffa33abe;
-            border: 1px solid $message-color-border;
-            border-radius: 10px;
-            border-top-left-radius: 0px;
-            margin-left: 2%;
-            margin-bottom: 6%;
-            display: flex;
-            align-self: flex-start;
-            flex-wrap: wrap;
-        }
-        .message_people_name {
-            align-self: flex-start;
-            width: 30%;
-            margin-left: 10px;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .message_for_people {
-            display: flex;
-            width: 100%;
-            height: 70%;
-            margin: 0;
-            margin-left: 10px;
-        }
-        .message_date {
-            width: 100%;
-            text-align: end;
-            margin-right: 10px;
-    }
-
 }
 
 #form_message {
@@ -179,9 +204,9 @@ $message-color-border: #ffa33a70;
 
 .input_message {
     width: 70vw;
-    height: 40%;
-    border: 1px solid gray;
-    border-radius: 8px;
+    height: 60%;
+    border: none;
+    border-bottom:1px solid #c07a2b;
     background-color: $primary-color;
 }
 .btn_upload {
@@ -210,9 +235,10 @@ $message-color-border: #ffa33a70;
 .feed_block {
     display: flex;
     flex-wrap: wrap;
-    width: 15%;
     height: 100%;
     border-left: 1px solid rgba(107, 107, 107, 0.3);
+    margin-left: 1%;
+    width: 20vw;
 }
 
 .feed_header {
@@ -227,6 +253,9 @@ $message-color-border: #ffa33a70;
 .feed_block__header-button {
     display: flex;
     justify-content: space-between;
+    margin-left: 10%;
+    height: 40%;
+    margin-bottom: 10%;
 }
 
 .btn_profile {
@@ -242,32 +271,197 @@ $message-color-border: #ffa33a70;
     border: none;
     text-decoration: underline;
     font-size: $font-size-small;
+    margin-bottom: 8px;
 }
 .search_chat {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-}
-.input_search {
-    margin-top: 20px;
-    width: 10vw;
-    border: 1px solid gray;
-    border-radius: 5px;
-    background-color: $primary-color;
+    flex-direction: column;
+    width: 100%;   
 }
 
-.feed_body {
-    height: 90%;
-    width: 100%;
+.myBtn {
+    background-color: #ffa33ac7;
+    color: white;
+    font-weight: bold;
+    font-size: small;
+    border: none;
+    cursor: pointer;
+    border-radius: 5%;
+    margin-top: 5px;
+  }
+.myBtn_delete {
+    background-color: #ffa33a;
+    
+    font-weight: bold;
+    font-size: small;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
 }
+
+.myBtn_delete:hover {
+    background-color: red;
+    border: 1px solid black;
+    transition: 1s;
+}
+  
+  .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      padding-top: 20%; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgb(0,0,0); 
+      background-color: rgba(0,0,0,0.4); 
+  }
+
+  
+  .modal-content {
+      position: relative;
+      background-color: #e7d7be;
+      margin: auto;
+      padding: 0;
+      border: 5px solid $primary-color;
+      width: 20vw;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+  
+  
+  @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0} 
+      to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+  
+  
+  .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  
+  .modal-header {
+      padding: 1% 4%;
+      background-color: rgb(255, 229, 212);
+      color: #ffa33a;
+  }
+  
+  .modal-body {padding: 2px 16px;}
+  
+  .modal-footer {
+      padding: 2px 16px;
+      background-color: rgb(255, 229, 212);
+  }
+  .modal-footer div {
+    margin-left: 75%;
+    width: 0%;
+  }
+  .btn_delete {
+    background-color: #ffa33a;
+    border: 1px solid red;
+    border-radius: 10%;
+    padding: .3vw;
+    
+}
+.btn_delete:hover {
+    background-color: #ff3a3a8f;
+    font-family:  Georgia, Serif;
+}
+
+.btn_add {
+    background-color: #ffa33a;
+    border: 1px solid $message-color-border;
+    border-radius: 10%;
+    padding: .3vw;
+    
+}
+.btn_add:hover {
+    background-color: #ffa33a8f;
+    font-family:  Georgia, Serif;
+}
+
+.input_search {
+    height: 3vh;
+    width: 15vw;
+    margin-bottom: 5px;
+    border-radius: 2%;
+    border: none;
+    border-bottom:1px solid #c07a2b;
+    background-color: $primary-color;
+}
+.feed_body {
+    height: 70%;
+    width: 100%;
+    margin-top: 50%;
+    overflow-y:scroll;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0 0% 50%);
+}
+
+@media (max-width: 1110px) {
+    .feed_body {
+        margin-top: 80%;
+    }
+}
+.feed_body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.feed_body::-webkit-scrollbar-track {
+    background-color: #ffa33a42;
+}
+.feed_body::-webkit-scrollbar-thumb {
+    background-color:#ffa33a59;
+}
+
 .feed_element {
     height: 8vh;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.308);
+}
+.feed_element:hover{
+    background-color: #0000000e;
+}
+.delete_chat {
+    margin-left: 20%;
+    margin-bottom: 4vh;
+    color:#bb6400;
     cursor: pointer;
+    font-size: medium;
+}
+.delete_chat:hover {
+    transform: .3s;
+    font-size: larger;
+}
+
+.name_people{
+    cursor: pointer;
+    font-size: large;
 }
 .photo{
     width: 50px;
@@ -283,13 +477,10 @@ $message-color-border: #ffa33a70;
     align-items: start;
     margin-left: 10px;
 }
-.name_people {
-    font-size: large;
-}
 .message_you {
     font-size: x-small;
+    color: #00000085;
 }
-
 
 
 /* block edit profile */
@@ -299,10 +490,31 @@ $message-color-border: #ffa33a70;
     margin: 0;
     padding: 0;
     width: 70vw;
-    height: 99vh;
+    height: 90vh;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
+    animation: ani 1s forwards;
+    --c: #ffa33a98; /* the border color */
+                --b: 10px;    /* the border thickness*/
+                --g: 5px;     /* the gap on hover */
+  
+                padding: calc(var(--g) + var(--b));
+                --_g: #0000 25%,var(--c) 0;
+                background: 
+                        conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+                        var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+                        conic-gradient( at bottom var(--b) left  var(--b),var(--_g))
+                        0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+                        transition: .3s, background-position .3s .3s;
 }
+
+.block_edit_profile:hover {
+    width: 73vw;
+    height: 94vh;
+    --_i: 100%;
+    transition: .3s, background-size .3s .3s;
+}
+
 .form_block {
     width: 100%;
     height: 14%;
@@ -313,11 +525,12 @@ $message-color-border: #ffa33a70;
 .input_form {
     margin-left: 4vw;
     padding: 3px;
-    border-radius: 10px;
-    background-color: $primary-color;
     width: 20vw;
     height: 40%;
-    border:1px solid #c07a2b;
+    border-radius: 2%;
+    border: none;
+    border-bottom:1px solid #c07a2b;
+    background-color: $primary-color;
 }
 
 .name_features {
@@ -331,18 +544,54 @@ $message-color-border: #ffa33a70;
     height: 15%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;    
+    flex-direction: column;
+    text-align: center;   
 }
+.edit_profile_header div  {
+    width: 5%;
+    margin-left: 90%;
+}
+
 .edit_profile_body {
     width: 100%;
     height: 60%;
+
+    .avatarUpdate{
+        margin-left: 15vw;
+        background: $message-color-border;
+        border: 1px solid $message-color-border;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .avatarForm {
+        width: 100%;
+    }
+    .personal-image {
+        text-align: center;
+      }
+      .personal-image input[type="file"] {
+        display: none;
+      }
+      .personal-figure {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .personal-avatar {
+        cursor: pointer;
+        width: 80px;
+        height: 80px;
+        box-sizing: border-box;
+        border-radius: 100%;
+        border: 2px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+        transition: all ease-in-out .3s;
+      }
+      .personal-avatar:hover {
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+      }
 }
-.avatar {
-    background: url("../static/icons/avatar.png") no-repeat center;
-    background-size: 60px;
-    cursor: pointer;
-}
+
 .edit_profile_footer {
     margin-top: 10vh;
     margin-right: 4vw;
@@ -357,6 +606,22 @@ $message-color-border: #ffa33a70;
     background-color: #ffa33a;
 }
 
+.myBtn_ChangePassword {
+    width: 10vw;
+    margin-right: 17vw;
+    cursor: pointer;
+    font-size: $font-size-small;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #ffa33a59;
+    border: 1px solid #ffa33a;
+}
+.modal-footer div {
+    width: 40%;
+}
+.btn_sendPassword {
+    margin-right: 50px;
+}
 
 /* block profile */
 
@@ -368,7 +633,28 @@ $message-color-border: #ffa33a70;
     height: 90vh;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
+    animation: ani 1s forwards;
+                --c: #ffa33a98; /* the border color */
+                --b: 10px;    /* the border thickness*/
+                --g: 5px;     /* the gap on hover */
+  
+                padding: calc(var(--g) + var(--b));
+                --_g: #0000 25%,var(--c) 0;
+                background: 
+                        conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+                        var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+                        conic-gradient( at bottom var(--b) left  var(--b),var(--_g))
+                        0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+                        transition: .3s, background-position .3s .3s;
 }
+
+.block_profile:hover {
+    width: 46vw;
+    height: 92vh;
+        --_i: 100%;
+        transition: .3s, background-size .3s .3s;
+}
+
 .form {
     width: 100%;
     height: 15%;
@@ -388,16 +674,20 @@ $message-color-border: #ffa33a70;
     height: 15%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;    
+    flex-direction: column;
+    text-align: center;    
+}
+
+.profile_header div {
+    width: 5%;
+    margin-left: 90%;
 }
 
 .profile_body {
     width: 100%;
     height: 60%;
 }
-.user_setting, 
-.user_photo {
+.user_setting {
     margin-left: 3%;
     text-decoration: underline;
 }
@@ -406,16 +696,22 @@ $message-color-border: #ffa33a70;
 }
 .profile_footer {
     margin-top: 10vh;
-    margin-right: 4vw;
     display: flex;
-    align-items: center;
-    justify-content: flex-end  
+    align-items: flex-end;
+    flex-direction: column;
 }
 .btn_edit {
     font-size: medium;
     text-decoration: underline;
     background-color: $bg-color-zero;
+    margin-bottom: 1vh;
 }
+.btn_noLoad {
+    font-size: small;
+    text-decoration: underline;
+    background-color: $bg-color-zero;
+}
+
 
 
 /* block login */
@@ -428,10 +724,30 @@ $message-color-border: #ffa33a70;
     text-align: center;
     margin: 0;
     padding: 0;
-    width: 30vw;
-    height: 45%;
+    width: 25vw;
+    height: 40%;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
+    animation: ani 1s forwards;
+                --c: #ffa33a98; /* the border color */
+                --b: 10px;    /* the border thickness*/
+                --g: 5px;     /* the gap on hover */
+  
+                padding: calc(var(--g) + var(--b));
+                --_g: #0000 25%,var(--c) 0;
+                background: 
+                        conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+                        var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+                        conic-gradient(at bottom var(--b) left  var(--b),var(--_g))
+                        0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+                        transition: .3s, background-position .3s .3s;
+}
+.block_authorization:hover {
+    transition: .4s;
+    opacity: 0.95;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        --_i: 100%;
+        transition: .3s, background-size .3s .3s;
 }
 .header_text {
     display: flex;
@@ -479,11 +795,33 @@ $message-color-border: #ffa33a70;
     margin: 0;
     padding: 0;
     width: 35vw;
-    height: 90vh;
+    height: 80vh;
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
+    border-radius: 1em;
+    animation: ani 1s forwards;
+                --c: #ffa33a98; /* the border color */
+                --b: 10px;    /* the border thickness*/
+                --g: 5px;     /* the gap on hover */
+  
+                padding: calc(var(--g) + var(--b));
+                --_g: #0000 25%,var(--c) 0;
+                background: 
+                        conic-gradient(from 180deg at top    var(--b) right var(--b),var(--_g))
+                        var(--_i,200%) 0  /200% var(--_i,var(--b))  no-repeat,
+                        conic-gradient( at bottom var(--b) left  var(--b),var(--_g))
+                        0   var(--_i,200%)/var(--_i,var(--b)) 200%  no-repeat;
+                        transition: .3s, background-position .3s .3s;
 }
-
+.block_registration:hover {
+    width: 36vw;
+    height: 91vh;
+    transition: .4s;
+    opacity: 0.95;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+        --_i: 100%;
+        transition: .3s, background-size .3s .3s;
+}
 .registration_header {
     width: 100%;
     height: 10%;
@@ -539,6 +877,7 @@ $message-color-border: #ffa33a70;
     align-items: center;
     flex-direction: column;
     font-size: x-large;
+    
 }
 .error_type {
     text-decoration: underline;
@@ -588,4 +927,48 @@ $message-color-border: #ffa33a70;
     text-decoration: underline;
     cursor: pointer;
     font-size: x-large;
+}
+
+.chat p {
+    display:flex;
+    width: 100%;
+}
+.you_message {
+    margin-left: 63%;
+    max-width: 40%;
+    min-width: 35%;
+    background-color: #ffa33abe;
+    border: 1px solid $message-color-border;
+    border-radius: 10px;
+    border-bottom-right-radius:0px;
+    margin-right: 4%;
+    display: flex;
+    flex-direction: column;
+}
+.friend_message {
+    max-width: 40%;
+    min-width: 35%;
+    background-color: #ffa33abe;
+    border: 1px solid $message-color-border;
+    border-radius: 10px;
+    border-top-left-radius:0px;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+}
+.message_people_name {
+    align-self: flex-start;
+    margin-left: 10px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.message_for_people {
+    display: flex;
+    margin: 0;
+    margin-left: 2%;
+}
+.message_date {
+    width: 95%;
+    text-align: end;
+    margin-right: 10px;
 }
