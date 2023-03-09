@@ -1,9 +1,9 @@
-import Button from "../../../../components/buttonSendInfo/Button";
-import { render } from "../../../../utils/renderDOM";
-import Router from "../../../../utils/router"
+import Button from "../../components/buttonSendInfo/Button";
+import { render } from "../../utils/renderDOM";
+import Router from "../../utils/router"
 
 import Error500 from "./error500Page";
-import { Connect } from "../../../../../service/store";
+import { Connect } from "../../core/store";
 
 
 const router = new Router("#root");

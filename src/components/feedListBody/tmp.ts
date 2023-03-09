@@ -1,5 +1,5 @@
 import ChatConroller from "../../../service/controllers/chatController";
-import Store from "../../../service/store";
+import Store from "../../core/store";
 import newMessage from "../chatMessage/newMessage/newMassage";
 
 import getOldMessage from "../chatMessage/oldMessage/oldMessage";
@@ -64,13 +64,18 @@ function chatsListBody() {
         feed_element.appendChild(delete_chat)
 
         delete_chat.addEventListener("click", ()=>{
-            let confirm_message = confirm(`Удалить чат ${title}?  Не забудь после нажать на кнопку обновить чаты`)
+            let confirm_message = confirm(`Удалить чат ${title}?`)
             const chatId:any = Store.getState().chats.message[i].id;
 
             if(confirm_message === true) {
 
                 chat.deleteChatByID(chatId)
-                console.log(`Чат: ${title} ID:${chatId} удалён`)
+                console.log(`Чат: ${title} ID:${chatId} удалён`);
+
+                setTimeout(()=> {
+                    const chats = new ChatConroller()
+                    chats.getChats()},500)
+                setTimeout(()=> chatsListBody(), 800)
             }else {
                 console.log(`Чат: ${title} не удалён`)
             }

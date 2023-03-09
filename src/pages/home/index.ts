@@ -7,8 +7,8 @@ import AutheficationController from "../../../service/controllers/authController
 
 import mainPage from "./mainPage";
 
-import { Connect } from "../../../service/store";
-import Store from "../../../service/store";
+import { Connect } from "../../core/store";
+import Store from "../../core/store";
 import { buttonAdd } from "../../components/buttonAdd";
 import ChatConroller from "../../../service/controllers/chatController";
 
@@ -33,7 +33,7 @@ export default Connect(
                 if(Store.getState().user !== undefined) {const userId = Store.getState().user.id;}
 
                 let avatarlink;
-                if(Store.getState().user.avatar !== "null") {
+                if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined ) {
                         avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
                   }else {
                         avatarlink = ""
@@ -85,19 +85,6 @@ export default Connect(
                                                 }
                                         }
                                     }),
-                                    
-                                buttonrefreshChat: new Button({
-                                className: "btn_logout",
-                                child: "обновить чаты",
-                                events:{
-                                        click: (e:Event) => {
-                                                e.preventDefault();
-                                                const chats = new ChatConroller()
-                                                chats.getChats()
-                                                setTimeout( ()=>{chatsListBody()}, 500)
-                                        }
-                                }
-                                }),
                                 buttonSend: new Button({
                                         className: "btn btn_send",
                                         child: ``,

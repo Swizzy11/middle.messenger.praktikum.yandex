@@ -1,13 +1,13 @@
-import validator from "../../../../utils/validator"
-import buttonValidator from "../../../../utils/validatorButton"
-import { Input } from "../../../../components/input"
-import Button from "../../../../components/buttonSendInfo/Button";
-import Router from "../../../../utils/router"
+import validator from "../../utils/validator"
+import buttonValidator from "../../utils/validatorButton"
+import { Input } from "../../components/input"
+import Button from "../../components/buttonSendInfo/Button";
+import Router from "../../utils/router"
 
 import Registration from "./registrationPage"
 
-import AutheficationController from "../../../../../service/controllers/authController"
-import { Connect } from "../../../../../service/store";
+import AutheficationController from "../../../service/controllers/authController"
+import { Connect } from "../../core/store";
 
 
 

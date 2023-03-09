@@ -5,21 +5,20 @@ import './style.scss'
 
 
 
-import UserProfile from "./pages/home/modules/userProfile"
-import Login from "./pages/home/modules/login"
-import Registration from "./pages/home/modules/registration"
+import UserProfile from "./pages/userProfile"
+import Login from "./pages/login"
+import Registration from "./pages/registration"
 import MainPage from "./pages/home"
-import EditProfile from "./pages/home/modules/editProfile"
-import Error404 from "./pages/home/modules/error404"
-import Error500 from "./pages/home/modules/error500"
+import EditProfile from "./pages/editProfile"
+import Error404 from "./pages/error404"
+import Error500 from "./pages/error500"
 
 import Router from "./utils/router"
 
 
-import Index from "./layout"
-import Store from "../service/store"
+import Index from "./components/layout"
 import addValue from "./utils/heplerApp/addValue"
-import ChatConroller from "../service/controllers/chatController"
+
 
 
 

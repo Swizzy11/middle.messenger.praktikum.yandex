@@ -1,6 +1,6 @@
 import API, { ChatAPI, IChat} from "../chatAPI";
 import Router from "../../src/utils/router.js"
-import store from "../store"
+import store from "../../src/core/store"
 
 
 

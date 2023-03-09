@@ -1,11 +1,11 @@
-import Button from "../../../../components/buttonSendInfo/Button";
-import ButtonClose from "../../../../components/bottonClose/Button";
-import Router from "../../../../utils/router"
+import Button from "../../components/buttonSendInfo/Button";
+import ButtonClose from "../../components/bottonClose/Button";
+import Router from "../../utils/router"
 import UserProfile from "./userProfilePage";
-import { Connect } from "../../../../../service/store";
-import Store from "../../../../../service/store";
+import { Connect } from "../../core/store";
+import Store from "../../core/store";
 
-import addValue from "../../../../utils/heplerApp/addValue";
+import addValue from "../../utils/heplerApp/addValue";
 
 
 const router = new Router("#root")
@@ -15,7 +15,7 @@ export default Connect(
         UserProfile, 
         (state) => {
             let avatarlink;
-            if(Store.getState().user.avatar !== "null") {
+            if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined) {
                   avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
             }else {
                   avatarlink = ""

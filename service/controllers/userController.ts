@@ -1,6 +1,6 @@
 import API,{ UserAPI } from "../userAPI"
 import Router from "../../src/utils/router.js"
-import store from "../store"
+import store from "../../src/core/store"
 import { PasswordUpdate, UserProfileUpdate } from "../interfaceAPI";
 
 

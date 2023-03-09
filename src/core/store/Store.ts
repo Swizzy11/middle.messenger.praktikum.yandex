@@ -1,5 +1,5 @@
-import EventBus from "../../src/core/eventBus";
-import set, { Indexed } from "../../src/utils/heplerApp/set";
+import EventBus from "../eventBus";
+import set, { Indexed } from "../../utils/heplerApp/set";
 
 
 export default class Store extends EventBus {

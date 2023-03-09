@@ -39,9 +39,6 @@ const tpl =
        <form action="" method="post" target="_blank" > 
                 {{{deleteUserToChat}}}   
        </form>
-       <form action="" method="post" target="_blank" > 
-                {{{buttonrefreshChat}}}   
-       </form>
    </div>
    <hr style="width: 100%;margin-left: 3% ; opacity: .3;">
 </div>

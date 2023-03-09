@@ -1,5 +1,5 @@
 import tpl from "./tpl";
-import Block from "../../../../core/Block";
+import Block from "../../core/Block";
 
 
 export default class Error500 extends Block {

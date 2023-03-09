@@ -1,24 +1,24 @@
-import { Input } from "../../../../components/input"
-import  Button  from "../../../../components/buttonSendInfo/Button"
-import validator from "../../../../utils/validator"
+import { Input } from "../../components/input"
+import  Button  from "../../components/buttonSendInfo/Button"
+import validator from "../../utils/validator"
 
 import EditProfile from "./editProfilePage"
-import { buttonClose } from "../../../../components/bottonClose"
-import Router from "../../../../utils/router.js"
-import UserConroller from "../../../../../service/controllers/userController"
-import { Connect } from "../../../../../service/store"
-import { Avatar } from "../../../../components/avatar"
-import Store from "../../../../../service/store"
-import { buttonAdd } from "../../../../components/buttonAdd"
-import { buttonAddChat } from "../../../../components/buttonAdd/buttonAddChat"
-import { buttonCloseModal } from "../../../../components/buttonAdd/butoonCloseModal"
-import { buttonSendInfo } from "../../../../components/buttonSendInfo"
-import comparisonPassword from "../../../../utils/heplerApp/passwordComparison"
-import { errorMessage } from "../../../../components/errorMessage"
-import validatorPassword from "../../../../utils/validatorPassword"
-import addValue from "../../../../utils/heplerApp/addValue"
-import AutheficationController from "../../../../../service/controllers/authController"
-import chatsListBody from "../../../../components/feedListBody/tmp"
+import { buttonClose } from "../../components/bottonClose"
+import Router from "../../utils/router.js"
+import UserConroller from "../../../service/controllers/userController"
+import { Connect } from "../../core/store"
+import { Avatar } from "../../components/avatar"
+import Store from "../../core/store"
+import { buttonAdd } from "../../components/buttonAdd"
+import { buttonAddChat } from "../../components/buttonAdd/buttonAddChat"
+import { buttonCloseModal } from "../../components/buttonAdd/butoonCloseModal"
+import { buttonSendInfo } from "../../components/buttonSendInfo"
+import comparisonPassword from "../../utils/heplerApp/passwordComparison"
+import { errorMessage } from "../../components/errorMessage"
+import validatorPassword from "../../utils/validatorPassword"
+import addValue from "../../utils/heplerApp/addValue"
+import AutheficationController from "../../../service/controllers/authController"
+import chatsListBody from "../../components/feedListBody/tmp"
 
 
 const router = new Router("#root")
@@ -30,7 +30,7 @@ export default Connect(
         (state) => {
 
                 let avatarlink;
-                if(Store.getState().user.avatar !== "null") {
+                if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined) {
                         avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
                   }else {
                         avatarlink = ""

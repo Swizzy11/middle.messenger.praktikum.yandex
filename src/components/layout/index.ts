@@ -1,4 +1,4 @@
-import Block from "../core/Block"
+import Block from "../../core/Block"
 import tpl from "./tpl"
 export default class Index extends Block {
 	constructor(tag, props = {}) {

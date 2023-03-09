@@ -1,4 +1,4 @@
-import Store from "../../../../service/store"
+import Store from "../../../core/store"
 
 
 export default function getOldMessage(name:string, text:string, blockID: string, friend_id: string, message_time:string) {
