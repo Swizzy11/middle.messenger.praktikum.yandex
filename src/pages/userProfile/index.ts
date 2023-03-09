@@ -14,6 +14,7 @@ const router = new Router("#root")
 export default Connect(
         UserProfile, 
         (state) => {
+            if(Store.getState().user !== undefined) {
             let avatarlink;
             if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined) {
                   avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
@@ -52,5 +53,5 @@ export default Connect(
             }else {
                   return
             }
-              
+      }        
 })
