@@ -1,5 +1,5 @@
 import API,{ UserAPI } from "../userAPI"
-import Router from "../../src/utils/router.js"
+import Router from "../../src/core/router"
 import store from "../../src/core/store"
 import { PasswordUpdate, UserProfileUpdate } from "../interfaceAPI";
 
@@ -33,13 +33,14 @@ export class UserConroller {
     }
     
     async updateAvatar(form:FormData) {
-        try {
+        // try {
          const userInfo:any = await this.api.uploadChatAvatar(form)
+         console.log(userInfo)
          store.set("user.avatar", userInfo.avatar)
-        }
-        catch(e) {
-            console.log(e.message)
-        }
+        // }
+        // catch(e) {
+        //     console.log(e.message)
+        // }
     }
 
 }

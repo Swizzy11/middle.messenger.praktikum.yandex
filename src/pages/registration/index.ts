@@ -2,7 +2,7 @@ import validator from "../../utils/validator"
 import buttonValidator from "../../utils/validatorButton"
 import { Input } from "../../components/input"
 import Button from "../../components/buttonSendInfo/Button";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 
 import Registration from "./registrationPage"
 

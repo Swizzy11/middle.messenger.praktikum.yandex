@@ -1,6 +1,6 @@
 import Button from "../../components/buttonSendInfo/Button";
 import ButtonClose from "../../components/bottonClose/Button";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 import UserProfile from "./userProfilePage";
 import { Connect } from "../../core/store";
 import Store from "../../core/store";

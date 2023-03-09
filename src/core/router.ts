@@ -1,5 +1,5 @@
 import { render } from "./renderDOM";
-import isEqual from "./heplerApp/isEqual"
+import isEqual from "../utils/heplerApp/isEqual"
 
   class Route {
 	

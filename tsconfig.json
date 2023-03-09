@@ -6,5 +6,8 @@
     "module": "commonjs",
     "strictNullChecks": true,
     "sourceMap": true,
+    "esModuleInterop": true,     
     }
 }
+
+

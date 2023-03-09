@@ -1,5 +1,5 @@
 import { v4 as makeUUID } from 'uuid';
-import Handlebars = require('handlebars');
+import Handlebars from "handlebars"
 import EventBus from './eventBus';
 
 export default class Component {

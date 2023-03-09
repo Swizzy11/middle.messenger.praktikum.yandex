@@ -26,23 +26,31 @@ type Options = {
   timeout?: number;
 };
 
-const mainUrl = 'https://ya-praktikum.tech/api/v2';
 
 class HTTPTransport {
+    static mainUrl = 'https://ya-praktikum.tech/api/v2';
+    path: string
+    constructor(url:string) {
+        this.path = `${HTTPTransport.mainUrl}${url}`
+    }
   async get<TResponse>(url: string, data?: {}): Promise<TResponse> {
-      return this.request(url, {method: METHODS.GET, data});
+    const fullUrl = this.path + url
+    return this.request(fullUrl, {method: METHODS.GET, data});
   }
 
   async post<TResponse>(url: string, data: {}): Promise<TResponse> {
-      return this.request(url, {method: METHODS.POST, data});
+    const fullUrl = this.path + url  
+    return this.request(fullUrl, {method: METHODS.POST, data});
   }
 
   async put<TResponse>(url: string, data: {}): Promise<TResponse> {
-      return this.request(url, {method: METHODS.PUT, data});
+    const fullUrl = this.path + url  
+    return this.request(fullUrl, {method: METHODS.PUT, data});
   }
 
   async delete<TResponse>(url: string, data: {}): Promise<TResponse> {
-      return this.request(url, {method: METHODS.DELETE, data});
+    const fullUrl = this.path + url  
+    return this.request(fullUrl, {method: METHODS.DELETE, data});
   }
 
   async request<TResponse>(
@@ -64,7 +72,7 @@ class HTTPTransport {
               }
           }
 
-          xhr.open(method, mainUrl + url);
+          xhr.open(method, url);
           xhr.withCredentials = true
 
           Object.keys(headers).forEach(key => {
@@ -74,17 +82,11 @@ class HTTPTransport {
 
           xhr.onload = function () {
               let resp;
-              try{
-                if (~xhr?.getResponseHeader('Content-Type')?.indexOf('application/json')!) { 
+              if (~xhr?.getResponseHeader('Content-Type')?.indexOf('application/json')!) { 
                 resp = JSON.parse(xhr.response)
               } else {
                   resp = xhr.response;
               }
-            }catch(error) {
-                console.log("Ошибка", error)
-            }
-
-
               if (xhr.status === 200) {
                   resolve(resp);
 
@@ -107,6 +109,7 @@ class HTTPTransport {
               xhr.send();
           } else {
               if (data instanceof FormData) {
+                  xhr.setRequestHeader("Content-Type", "multipart/form-data");
                   xhr.send(data);
               } else {
                   xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');

@@ -1,4 +1,4 @@
-import {render} from "./utils/renderDOM"
+import {render} from "./core/renderDOM"
 
 import './style.scss'
 
@@ -13,7 +13,7 @@ import EditProfile from "./pages/editProfile"
 import Error404 from "./pages/error404"
 import Error500 from "./pages/error500"
 
-import Router from "./utils/router"
+import Router from "./core/router"
 
 
 import Index from "./components/layout"

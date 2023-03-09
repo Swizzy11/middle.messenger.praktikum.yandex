@@ -2,7 +2,7 @@ import { UnderlineName } from "../../components/underlineName";
 import Button from "../../components/buttonSendInfo/Button";
 import validator from "../../utils/validator";
 import { Input } from "../../components/input";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 import AutheficationController from "../../../service/controllers/authController";
 
 import mainPage from "./mainPage";
@@ -27,7 +27,7 @@ export default Connect(
         (state) => {
 
                 if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 800)} 
-
+                if(Store.getState().user !== undefined) {
                 const chat = new ChatConroller()
                 
                 if(Store.getState().user !== undefined) {const userId = Store.getState().user.id;}
@@ -323,5 +323,5 @@ export default Connect(
                         }}
                 
         }
-
+        }
 )

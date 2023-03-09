@@ -1,6 +1,5 @@
 import Button from "../../components/buttonSendInfo/Button";
-import { render } from "../../utils/renderDOM";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 
 import Error500 from "./error500Page";
 import { Connect } from "../../core/store";

@@ -1,15 +1,17 @@
 import validator from "../../utils/validator";
 import { Input } from "../../components/input";
 import Button from "../../components/buttonSendInfo/Button";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 
 import Login from "./loginPage";
 import AutheficationController from "../../../service/controllers/authController";
 import { Connect } from "../../core/store";
-import Store from "../../core/store";
+
 import ChatConroller from "../../../service/controllers/chatController";
 import chatsListBody from "../../components/feedListBody/tmp";
 import { Signin } from "../../../service/interfaceAPI";
+
+
 const router = new Router("#root")
 
 export default Connect(

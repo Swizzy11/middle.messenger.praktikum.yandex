@@ -1,4 +1,4 @@
-import Block from "../core/Block";
+import Block from "./Block";
 
 export function render(query:string, block: Block): HTMLElement | null {
     const root = <HTMLElement>document.querySelector(query);

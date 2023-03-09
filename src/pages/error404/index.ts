@@ -1,7 +1,7 @@
 import AutheficationController from "../../../service/controllers/authController";
 import { Connect } from "../../core/store";
 import Button from "../../components/buttonSendInfo/Button";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 
 import Error404 from "./error404Page";
 

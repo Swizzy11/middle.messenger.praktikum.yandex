@@ -4,7 +4,7 @@ import validator from "../../utils/validator"
 
 import EditProfile from "./editProfilePage"
 import { buttonClose } from "../../components/bottonClose"
-import Router from "../../utils/router.js"
+import Router from "../../core/router"
 import UserConroller from "../../../service/controllers/userController"
 import { Connect } from "../../core/store"
 import { Avatar } from "../../components/avatar"
@@ -55,9 +55,7 @@ export default Connect(
                                                 submit: (e:Event) => {
                                                         e.preventDefault()
                                                         const userForm = <HTMLFormElement>document.getElementById("avatarUp")
-                                                        
                                                         const form = new FormData(userForm)
-                                                        
                                                         const editAvatar = new UserConroller()
                                                         editAvatar.updateAvatar(form);
                                                         const authController = new AutheficationController()
