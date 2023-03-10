@@ -46,7 +46,7 @@ export class ChatConroller {
     async deleteChatByID(id:number) {
         try{
           let chat = await this.api.deleteChatByID(id)
-
+          console.log(chat)
           store.set("deleteChat", chat)
         }
         catch(error) {

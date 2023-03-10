@@ -213,7 +213,7 @@ export default Connect(
                                                 className: 'btn btn_add',
                                                 child: "Add",
                                                 events: {
-                                                  click: (e:Event) => {
+                                                  click: async (e:Event) => {
                                                     e.preventDefault()
                                                         const nameChatInput = document.querySelectorAll(".add_chat_user")
                                                         let userId;
@@ -228,7 +228,8 @@ export default Connect(
                                                         const chats = new ChatConroller();
                                                         chats.addUserToChat({users: [userId], chatId: chatId})
                                       
-                                                        setTimeout(()=> {chats.getChats()}, 50)
+                                                        await chats.getChats()
+                                                        setTimeout(()=> { chatsListBody()}, 500)
                                                   }
                                                 }
                                               }),
