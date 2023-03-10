@@ -73,7 +73,7 @@ function chatsListBody() {
                     console.log(`Чат: ${title} ID:${chatId} удалён`);
                     const chats = new ChatConroller()
                     chats.getChats()
-                    chatsListBody()
+                    setTimeout(() =>chatsListBody(), 500)
             }else {
                 console.log(`Чат: ${title} не удалён`)
             }
