@@ -43,7 +43,7 @@ export default Connect(
                         child: "Войти",
                         type:"submit",
                         events: {
-                                click: async (e: MouseEvent) => {
+                                click: (e: MouseEvent) => {
                                         const loginData:Signin = {
                                                 login: "",
                                                 password: ""
@@ -58,12 +58,13 @@ export default Connect(
                                                 
                                                 const au = new AutheficationController()
 
-                                                        await au.signIn(loginData)
-                                               
+                                                setTimeout(()=> au.signIn(loginData), 150)
+                                                setTimeout( ()=> {
                                                         const chats = new ChatConroller()
-                                                        await chats.getChats()
+                                                        chats.getChats()}
+                                                        , 1000)
                                                 
-                                                        chatsListBody()
+                                                setTimeout(()=> chatsListBody(), 2000)
                                                 
                                         }
                                 }

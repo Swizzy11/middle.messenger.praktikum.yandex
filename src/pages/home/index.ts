@@ -167,7 +167,8 @@ export default Connect(
                                                            title: nameChatInfo
                                                           })
                                       
-                                                           setTimeout(()=> {chats.getChats()}, 50)
+                                                                setTimeout(()=>chats.getChats(),500)
+                                                                setTimeout(()=>chatsListBody(), 1000)
                                                   }
                                                 }
                                               }),
@@ -229,7 +230,6 @@ export default Connect(
                                                         chats.addUserToChat({users: [userId], chatId: chatId})
                                       
                                                         await chats.getChats()
-                                                        setTimeout(()=> { chatsListBody()}, 500)
                                                   }
                                                 }
                                               }),

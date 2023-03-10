@@ -23,12 +23,8 @@ export class AutheficationController {
                 const error:any =  document.querySelector(".error_password");
                 const userInfo = await this.api.userInfo();
                 store.set("user", userInfo)
-
-                setTimeout(()=>{
                     error.innerHTML = ""
                     router.go("/messanger"); 
-                    }, 800)
-    
                 return;
                 
             }
