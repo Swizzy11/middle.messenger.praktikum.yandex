@@ -25,14 +25,14 @@ const router = new Router("#root")
 export default Connect(
         mainPage,
         (state) => {
-
-                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 500)} 
-                if(Store.getState().user !== undefined) {
+                let user = Store.getState().user
+                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 800)} 
+                if( user !== undefined) {
                 const chat = new ChatConroller()
-                const user = Store.getState().user
+                
                 if(user !== undefined) {const userId = user.id;}
 
-                let avatarlink:string;
+                let avatarlink;
                 if(user.avatar !== "null" && user !== undefined ) {
                         avatarlink = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
                   }else {
@@ -40,7 +40,7 @@ export default Connect(
                   }
                 if(Store.getState().chats !== undefined) {
 
-                        const userId:any = Store.getState().user.id
+                        const userId:any = user.id
 
                         return {
                                 avatar: `<img class="user_photo_chat" src="${avatarlink}">`,
@@ -97,12 +97,12 @@ export default Connect(
                                                                 
                                                                         const text = elem.value;
                                                                         let chatId: number;
-                                                                        let current = Store.getState().current
-                                                                        if(current=== "" || current === undefined) {
+
+                                                                        if(Store.getState().current === "" || Store.getState().current === undefined) {
                                                                                 alert("Выберите чат!");
                                                                         }else {
                                                                                
-                                                                                chatId = current;
+                                                                                chatId = Store.getState().current;
                                                                                 let socket = Store.getState().socket;
 
                                                                                 if(elem) {
