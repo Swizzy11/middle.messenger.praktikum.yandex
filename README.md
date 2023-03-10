@@ -1,4 +1,4 @@
-# Middle frontend. [![Netlify Status](https://api.netlify.com/api/v1/badges/e844dcab-c227-4712-ba3a-4bbd2688069f/deploy-status)](https://app.netlify.com/sites/playful-rabanadas-07623b/deploys)
+# Middle frontend. [![Netlify Status](https://api.netlify.com/api/v1/badges/f61fec15-4011-45a8-910a-37afb33c8b6e/deploy-status)](https://app.netlify.com/sites/gorgeous-meringue-89fd49/deploys)
 ## sprint: 4
 Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node-id=0%3A1&t=niYmVaAe1UiTzQhi-0)
 
@@ -6,7 +6,7 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
  > > start server : ```npm run start```
  > > build : ```npm run build```
 
- Deployed: [Netlify](https://curious-cajeta-790264.netlify.app)
+ Deployed: [Netlify](https://gorgeous-meringue-89fd49.netlify.app)
 
  Project description:
  Проект находится на стадии разработки. 
@@ -16,6 +16,12 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
 > > Простейший роутинг с помощью ссылок.
 > > Добавил ссылки на все кнопки.
 > > Так же повесил обработчики на все формы, теперь в консоль выводятся соответствующие объекты.
+> >
+> > Внедрил Webpack и так же прописал его конфиг.
+> > Доработал систему авторизации и регистрации.
+> > Добавил тесты.
+> > Собрал Docker сборку.
+> > 
 > >
 > Добавил работу с информацией пользователя( аватарки не вставляются, сервер отдаёт ошибку 500).
 > В том числе редактирование пользователя.

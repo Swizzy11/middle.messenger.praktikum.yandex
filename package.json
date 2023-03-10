@@ -8,7 +8,7 @@
     "dev": "webpack serve --mode development --open",
     "start": "webpack && node ./server.ts",
     "test": "jest --config ./jest.config.js",
-    "stylelint-check": "stylelint-config-prettier-check",
+    "stylelint": "stylelint-config-prettier-check",
     "watch": "webpack --watch",
     "build": "webpack --mode production"
   },
