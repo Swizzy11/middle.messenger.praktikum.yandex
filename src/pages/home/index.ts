@@ -97,8 +97,8 @@ export default Connect(
                                                                 
                                                                         const text = elem.value;
                                                                         let chatId: number;
-                                                                        let current = Store.getState().current;
-                                                                        if(current === "" || current === undefined) {
+                                                                        let current = Store.getState().current
+                                                                        if(current=== "" || current === undefined) {
                                                                                 alert("Выберите чат!");
                                                                         }else {
                                                                                
@@ -167,7 +167,7 @@ export default Connect(
                                                            title: nameChatInfo
                                                           })
                                       
-                                                           setTimeout(() => chats.getChats(), 100)
+                                                           setTimeout(()=> {chats.getChats()}, 50)
                                                   }
                                                 }
                                               }),
@@ -177,7 +177,7 @@ export default Connect(
                                                   click: () => {
                                                     let modal:any = document.getElementById('myModalChatAdd');
                                                     const modalClose = document.getElementsByClassName("close")
-                                                    let span:Node;
+                                                    let span;
                                                     if(modalClose.length === 3) {
                                                         span = document.getElementsByClassName("close")[0];
                                                     }else {
