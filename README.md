@@ -8,6 +8,7 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
 
  Deployed: [Netlify](https://gorgeous-meringue-89fd49.netlify.app)
 
+ Deployed: [Render](https://messanger-97jb.onrender.com)   
  Project description:
  Проект находится на стадии разработки. 
 > В данный момент выполнено:
@@ -17,11 +18,8 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
 > > Добавил ссылки на все кнопки.
 > > Так же повесил обработчики на все формы, теперь в консоль выводятся соответствующие объекты.
 > >
-> > Внедрил Webpack и так же прописал его конфиг.
-> > Доработал систему авторизации и регистрации.
-> > Добавил тесты.
-> > Собрал Docker сборку.
-> > 
+
+> >Sprint 3 
 > >
 > Добавил работу с информацией пользователя( аватарки не вставляются, сервер отдаёт ошибку 500).
 > В том числе редактирование пользователя.
@@ -31,3 +29,10 @@ Design: [Figma file](https://www.figma.com/file/8n6wmTfLKXSWgexxrl33By/Chat?node
 > > Написание простейшего сервера(статика).
 > > Загрузка на GitHub.
 > > Загрузка на Netlify.
+
+
+> >Sprint 4 
+> > Внедрил Webpack и так же прописал его конфиг.
+> > Доработал систему авторизации и регистрации.
+> > Добавил тесты.
+> > Собрал Docker сборку.
