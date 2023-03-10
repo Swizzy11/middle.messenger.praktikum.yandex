@@ -1,5 +1,4 @@
 FROM node:latest
-WORKDIR /var/www
 
 COPY package*.json ./
 
