@@ -7,11 +7,11 @@ const http = new HTTPTransport("/user");
 
 export class UserAPI extends BaseAPI {
 
-   async uploadChatAvatar(formdata: FormData) {
+   async uploadChatAvatar(formdata: FormData):Promise<unknown> {
         return http.put(`/profile/avatar`, formdata)
     }
 
-    async updatePassword(oldPassword: PasswordUpdate, newPassword:PasswordUpdate) {
+    async updatePassword(oldPassword: PasswordUpdate, newPassword:PasswordUpdate):Promise<unknown> {
         return http.put(`/password`,
         {
             oldPassword: oldPassword, 
@@ -19,7 +19,7 @@ export class UserAPI extends BaseAPI {
         })
     }
 
-    async updateProfile(body: UserProfileUpdate) {
+    async updateProfile(body: UserProfileUpdate):Promise<unknown> {
         return http.put(`/profile`, body)
     }
 

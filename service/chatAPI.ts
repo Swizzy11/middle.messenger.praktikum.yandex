@@ -11,7 +11,7 @@ export interface IChat {
 
 export class ChatAPI extends BaseAPI {
 
-    async createChat(data:IChat):Promise<any> {
+    async createChat(data:IChat):Promise<unknown> {
         return http.post("", data)
     }
 
@@ -25,15 +25,15 @@ export class ChatAPI extends BaseAPI {
         return http.get("")
     }
 
-    async addUserToChat(data: {users: number[], chatId: number}) {
+    async addUserToChat(data: {users: number[], chatId: number}):Promise<unknown> {
         return http.put("/users", data)
     }
 
-    async deleteUserToChat(data: {users:number[], chatId: number}) {
+    async deleteUserToChat(data: {users:number[], chatId: number}):Promise<unknown> {
         return http.delete("/users", data)
     }
 
-    async getToken(id: string): Promise<any> {
+    async getToken(id: string):Promise<unknown> {
         return http.post(`/token/${id}`, {})
       }
 }

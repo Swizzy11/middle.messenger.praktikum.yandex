@@ -2,7 +2,7 @@ import { v4 as makeUUID } from 'uuid';
 import Handlebars from "handlebars"
 import EventBus from './eventBus';
 
-export default class Component {
+export class Component {
 	
 	static EVENT_INIT 		= 'init';
     static EVENT_FLOW_CDM 	= 'flow:component-did-mount';
@@ -22,7 +22,6 @@ export default class Component {
 		
 		this._eventBus = new EventBus()
 		this._id = makeUUID();
-		//this._children = children;
 		this._children = this.makePropsProxy(children);
 		this._props = this.makePropsProxy({ ...props, __id: this._id });
 		this._meta = { tag, props };

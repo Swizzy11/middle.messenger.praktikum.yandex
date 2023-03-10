@@ -1,7 +1,6 @@
 import { Input } from "../../components/input"
 import  Button  from "../../components/buttonSendInfo/Button"
 import validator from "../../utils/validator"
-
 import EditProfile from "./editProfilePage"
 import { buttonClose } from "../../components/bottonClose"
 import Router from "../../core/router"
@@ -28,10 +27,11 @@ const router = new Router("#root")
 export default Connect(
         EditProfile,
         (state) => {
-                if(Store.getState().user !== undefined) {
+                const user = Store.getState().user
+                if(user !== undefined) {
                 let avatarlink;
-                if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined ) {
-                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
+                if(user.avatar !== "null" && user !== undefined ) {
+                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
                   }else {
                         avatarlink = ""
                   }
@@ -210,7 +210,6 @@ export default Connect(
                                                         const password:any = document.querySelector(".change_password");
                                                         errorMessage.style.color = "red";
                                                         errorMessage.style.fontSize = "smaller";
-                                                        let error_password = <HTMLDivElement>document.querySelector(".error_password") 
                                                         if(validatorPassword("passwordValid") === true) {
                                                                 if(oldPassword.value !== "" && oldPassword.value !== undefined){
                                                                         if(comparisonPassword() === true) {

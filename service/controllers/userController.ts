@@ -33,14 +33,14 @@ export class UserConroller {
     }
     
     async updateAvatar(form:FormData) {
-        // try {
+        try {
          const userInfo:any = await this.api.uploadChatAvatar(form)
          console.log(userInfo)
          store.set("user.avatar", userInfo.avatar)
-        // }
-        // catch(e) {
-        //     console.log(e.message)
-        // }
+        }
+        catch(e) {
+            console.log(e.message)
+        }
     }
 
 }

@@ -26,15 +26,15 @@ export default Connect(
         mainPage,
         (state) => {
 
-                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 800)} 
+                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 500)} 
                 if(Store.getState().user !== undefined) {
                 const chat = new ChatConroller()
-                
-                if(Store.getState().user !== undefined) {const userId = Store.getState().user.id;}
+                const user = Store.getState().user
+                if(user !== undefined) {const userId = user.id;}
 
-                let avatarlink;
-                if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined ) {
-                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
+                let avatarlink:string;
+                if(user.avatar !== "null" && user !== undefined ) {
+                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
                   }else {
                         avatarlink = ""
                   }
@@ -45,7 +45,7 @@ export default Connect(
                         return {
                                 avatar: `<img class="user_photo_chat" src="${avatarlink}">`,
                                 userName: new UnderlineName({
-                                       text: `${Store.getState().user.first_name} ${Store.getState().user.second_name}`
+                                       text: `${user.first_name} ${user.second_name}`
                                 }),
                                 buttonProfile: new Button({
                                         className: "btn_profile",
@@ -97,12 +97,12 @@ export default Connect(
                                                                 
                                                                         const text = elem.value;
                                                                         let chatId: number;
-
-                                                                        if(Store.getState().current === "" || Store.getState().current === undefined) {
+                                                                        let current = Store.getState().current;
+                                                                        if(current === "" || current === undefined) {
                                                                                 alert("Выберите чат!");
                                                                         }else {
                                                                                
-                                                                                chatId = Store.getState().current;
+                                                                                chatId = current;
                                                                                 let socket = Store.getState().socket;
 
                                                                                 if(elem) {
@@ -167,7 +167,7 @@ export default Connect(
                                                            title: nameChatInfo
                                                           })
                                       
-                                                           setTimeout(()=> {chats.getChats()}, 50)
+                                                           setTimeout(() => chats.getChats(), 100)
                                                   }
                                                 }
                                               }),
@@ -177,7 +177,7 @@ export default Connect(
                                                   click: () => {
                                                     let modal:any = document.getElementById('myModalChatAdd');
                                                     const modalClose = document.getElementsByClassName("close")
-                                                    let span;
+                                                    let span:Node;
                                                     if(modalClose.length === 3) {
                                                         span = document.getElementsByClassName("close")[0];
                                                     }else {

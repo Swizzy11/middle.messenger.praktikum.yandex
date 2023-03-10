@@ -1,4 +1,3 @@
-
 export default function sendMessage(text:string, blockID: string) {
 
     let chat = <HTMLElement>document.querySelector(`${blockID}`)

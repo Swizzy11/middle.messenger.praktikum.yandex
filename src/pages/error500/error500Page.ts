@@ -1,8 +1,8 @@
 import tpl from "./tpl";
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 
 
-export default class Error500 extends Block {
+export default class Error500 extends Component {
     render() {
         return this.compile(tpl)
     }

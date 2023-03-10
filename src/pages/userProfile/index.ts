@@ -14,22 +14,23 @@ const router = new Router("#root")
 export default Connect(
         UserProfile, 
         (state) => {
-            if(Store.getState().user !== undefined) {
-            let avatarlink;
-            if(Store.getState().user.avatar !== "null" && Store.getState().user !== undefined ) {
-                  avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
+            const user = Store.getState().user;
+            if(user !== undefined) {
+            let avatarlink:string;
+            if(user.avatar !== "null" && user !== undefined ) {
+                  avatarlink = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
             }else {
                   avatarlink = ""
             }
-            if(Store.getState().user !== undefined) {
+            if(user !== undefined) {
                   return { 
                         userPhoto: `<img class="user_photo" src="${avatarlink}">`,
-                        userName: Store.getState().user.first_name,
-                        userSurname: Store.getState().user.second_name,
-                        email: Store.getState().user.email,
-                        login: Store.getState().user.login,
-                        nameInChat: Store.getState().user.display_name,
-                        phone: Store.getState().user.phone,
+                        userName: user.first_name,
+                        userSurname: user.second_name,
+                        email: user.email,
+                        login: user.login,
+                        nameInChat: user.display_name,
+                        phone: user.phone,
 
                         buttonEdit: new Button({
                               className: "btn btn_edit",
@@ -37,7 +38,7 @@ export default Connect(
                               events: {
                                     click: () => {
                                           router.go("/settings");
-                                          setTimeout(()=>{addValue()},200)
+                                          addValue()
                                     }
                               }
                         }),

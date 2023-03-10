@@ -7,20 +7,20 @@ const http = new HTTPTransport("/auth");
 
 export class AuthAPI extends BaseAPI {
 
-    async loginApi(data: Signin) {
+    async loginApi(data: Signin):Promise<unknown> {
         return http.post("/signin", data);
     }
     
-    registration(data: Signup) {
+    registration(data: Signup):Promise<unknown> {
         return http.post('/signup', data);
     }
     
-    async logout() {
+    async logout():Promise<unknown> {
         return http.post('/logout', "");
     }
     
     
-    async userInfo() {
+    async userInfo():Promise<UserInfo[]> {
         return http.get("/user");
     }
  

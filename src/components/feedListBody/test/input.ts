@@ -1,5 +1,5 @@
 import tpl from "./tpl";
-import Block from "../../../core/Block"
+import { Component } from "../../../core/Component";
 
 export interface ITEST {
   name: string;
@@ -9,7 +9,7 @@ export interface ITEST {
 }
 }
 
-export default class chatsListBodyTEST extends Block {
+export default class chatsListBodyTEST extends Component {
     constructor(props:ITEST) {
       super("div", props);
     }

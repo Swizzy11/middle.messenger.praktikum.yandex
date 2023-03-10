@@ -1,5 +1,5 @@
 import tpl from "./tpl";
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 
 export interface IAvatar {
   type: string;
@@ -15,7 +15,7 @@ export interface IAvatar {
   }
 }
 
-export default class Input extends Block {
+export default class Input extends Component {
     constructor(props:IAvatar) {
       super("div", props);
     }

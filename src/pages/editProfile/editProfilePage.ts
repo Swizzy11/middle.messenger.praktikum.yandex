@@ -1,8 +1,8 @@
 import tpl from "./tpl";
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 
 
-export default class EditProfile extends Block {
+export default class EditProfile extends Component {
 
     render() {
         return this.compile(tpl)

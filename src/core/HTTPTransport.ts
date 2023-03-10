@@ -1,4 +1,3 @@
-import { json } from "stream/consumers";
 
 const enum METHODS {
   GET = "GET",

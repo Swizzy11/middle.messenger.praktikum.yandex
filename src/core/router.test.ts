@@ -1,8 +1,8 @@
 /** @jest-environment jsdom */
-import Block from "./Block";
+import { Component } from "./Component";
 import Router from "./router";
 
-class TestRouterLogin extends Block{
+class TestRouterLogin extends Component {
   render() {
     return this.compile(`<div id="test_router">Login</div>`, {})
   }

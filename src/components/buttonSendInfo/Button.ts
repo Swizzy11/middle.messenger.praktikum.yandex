@@ -1,4 +1,4 @@
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 import tmp from "./tmp";
 
 export interface IButton {
@@ -12,7 +12,7 @@ export interface IButton {
     submit?: (e:Event) => void;
   }
 }
-export default class Button extends Block {
+export default class Button extends Component {
     constructor(props:IButton) {
       super("div", props);
     }

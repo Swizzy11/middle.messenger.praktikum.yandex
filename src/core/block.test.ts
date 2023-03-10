@@ -1,13 +1,13 @@
 /** @jest-environment jsdom */
-import Block from "./Block"
+import { Component } from "./Component"
 
-class TestBlock extends Block {
+class TestBlock extends Component {
     render(){
         return this.compile("Test", {})
     }
 }
 
-class TemplateBlock extends Block {
+class TemplateBlock extends Component {
     render(){
         return this.compile(`{{{hi}}}`, {
             hi: this._props.hi

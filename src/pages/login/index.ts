@@ -5,7 +5,7 @@ import Router from "../../core/router"
 
 import Login from "./loginPage";
 import AutheficationController from "../../../service/controllers/authController";
-import { Connect } from "../../core/store";
+import {Connect}  from "../../core/store";
 
 import ChatConroller from "../../../service/controllers/chatController";
 import chatsListBody from "../../components/feedListBody/tmp";
@@ -17,12 +17,6 @@ const router = new Router("#root")
 export default Connect(
         Login,
         (state) => {
-                
-                // if(Object.entries(Store.getState()).length !== 0) {
-                //         const userApi = new AutheficationController
-                //         const userInfo = userApi.userInfo()
-                //         Store.set("user", userInfo)
-                // }
                return {
                 login: new Input({
                         type: "text",
@@ -64,13 +58,13 @@ export default Connect(
                                                 
                                                 const au = new AutheficationController()
 
-                                                setTimeout(()=> au.signIn(loginData), 150)
+                                                au.signIn(loginData)
                                                 setTimeout( ()=> {
                                                         const chats = new ChatConroller()
                                                         chats.getChats()}
-                                                        , 1000)
+                                                        , 500)
                                                 
-                                                setTimeout(()=> chatsListBody(), 2000)
+                                               
                                                 
                                         }
                                 }

@@ -1,8 +1,8 @@
 
 import tpl from "./tpl";
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 
-export default class UserProfile extends Block {
+export default class UserProfile extends Component {
     render() {
         return this.compile(tpl)
     }
