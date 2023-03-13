@@ -1,4 +1,4 @@
-import Block from "../../../core/Block";
+import { Component } from "../../../core/Component";
 import tmp from "./tmp";
 
 export interface IButton {
@@ -7,7 +7,7 @@ export interface IButton {
     click: (e: Event) => void;
   }
 }
-export default class buttonCloseModal extends Block {
+export default class buttonCloseModal extends Component {
     constructor(props:IButton) {
       super("div", props);
     }

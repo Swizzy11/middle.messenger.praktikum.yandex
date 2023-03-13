@@ -1,11 +1,11 @@
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 import tpl from "./tpl";
 
 export interface IUnderline {
   text: string;
 }
 
-export default class UnderlineName extends Block {
+export default class UnderlineName extends Component {
     constructor(props:IUnderline) {
       super("div", props);
     }

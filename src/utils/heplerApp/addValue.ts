@@ -1,4 +1,4 @@
-import Store from "../../../service/store";
+import Store from "../../core/store";
 
 export default function addValue() {
     const avatar = <HTMLInputElement>document.querySelector(".personal-avatar")

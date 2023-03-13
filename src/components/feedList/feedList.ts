@@ -1,4 +1,4 @@
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 import tpl from "./tpl";
 
 export interface IFeedlist {
@@ -7,7 +7,7 @@ export interface IFeedlist {
   }
 }
 
-export default class FeedList extends Block {
+export default class FeedList extends Component {
     constructor(props:IFeedlist) {
       super("div", props);
     }

@@ -1,8 +1,5 @@
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 import tmp from "./tmp";
-import { buttonSendInfo } from "../buttonSendInfo";
-import { ChatConroller } from "../../../service/controllers/chatController";
-import { buttonCloseModal } from "../buttonAdd/butoonCloseModal";
 
 export interface IModalWindow {
   child?:string;
@@ -10,7 +7,7 @@ export interface IModalWindow {
     click: (e: Event) => void;
   }
 }
-export default class buttonAddChat extends Block {
+export default class buttonAddChat extends Component {
     constructor(props:IModalWindow) {
       super("div", {
 

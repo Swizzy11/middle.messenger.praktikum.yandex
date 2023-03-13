@@ -1,4 +1,4 @@
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 import tpl from "./tpl";
 
 export interface IError {
@@ -6,7 +6,7 @@ export interface IError {
   class: string;
 }
 
-export default class errorMessage extends Block {
+export default class errorMessage extends Component {
     constructor(props:IError) {
       super("div", props);
     }

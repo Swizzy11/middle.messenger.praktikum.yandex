@@ -1,8 +1,8 @@
 import { BaseAPI } from "./baseAPI";
 import { Chat } from "./interfaceAPI";
-import HTTPTransport from "../src/utils/HTTPTransport";
+import HTTPTransport from "../src/core/HTTPTransport";
 
-const http = new HTTPTransport();
+const http = new HTTPTransport("/chats");
 
 
 export interface IChat {
@@ -11,30 +11,30 @@ export interface IChat {
 
 export class ChatAPI extends BaseAPI {
 
-    async createChat(data:IChat):Promise<any> {
-        return http.post("/chats", data)
+    async createChat(data:IChat):Promise<unknown> {
+        return http.post("", data)
     }
 
     async deleteChatByID(id:number): Promise<unknown> {
-        return http.delete("/chats", {
+        return http.delete("", {
             chatId: id,
         })
     }
 
     async getChats(): Promise<Chat[]> {
-        return http.get("/chats")
+        return http.get("")
     }
 
-    async addUserToChat(data: {users: number[], chatId: number}) {
-        return http.put("/chats/users", data)
+    async addUserToChat(data: {users: number[], chatId: number}):Promise<unknown> {
+        return http.put("/users", data)
     }
 
-    async deleteUserToChat(data: {users:number[], chatId: number}) {
-        return http.delete("/chats/users", data)
+    async deleteUserToChat(data: {users:number[], chatId: number}):Promise<unknown> {
+        return http.delete("/users", data)
     }
 
-    async getToken(id: string): Promise<any> {
-        return http.post(`/chats/token/${id}`, {})
+    async getToken(id: string):Promise<unknown> {
+        return http.post(`/token/${id}`, {})
       }
 }
 

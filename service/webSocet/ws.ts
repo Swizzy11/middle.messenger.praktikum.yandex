@@ -1,4 +1,4 @@
-import store from "../store";
+import store from "../../src/core/store";
 
 export interface wsChat {
     userID: number | null;

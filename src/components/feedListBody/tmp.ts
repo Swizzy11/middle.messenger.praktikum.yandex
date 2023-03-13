@@ -1,5 +1,5 @@
 import ChatConroller from "../../../service/controllers/chatController";
-import Store from "../../../service/store";
+import Store from "../../core/store";
 import newMessage from "../chatMessage/newMessage/newMassage";
 
 import getOldMessage from "../chatMessage/oldMessage/oldMessage";
@@ -63,14 +63,17 @@ function chatsListBody() {
 
         feed_element.appendChild(delete_chat)
 
-        delete_chat.addEventListener("click", ()=>{
-            let confirm_message = confirm(`Удалить чат ${title}?  Не забудь после нажать на кнопку обновить чаты`)
+        delete_chat.addEventListener("click", async ()=>{
+            let confirm_message = confirm(`Удалить чат ${title}?`)
             const chatId:any = Store.getState().chats.message[i].id;
 
             if(confirm_message === true) {
 
-                chat.deleteChatByID(chatId)
-                console.log(`Чат: ${title} ID:${chatId} удалён`)
+                    await chat.deleteChatByID(chatId)
+                    console.log(`Чат: ${title} ID:${chatId} удалён`);
+                    const chats = new ChatConroller()
+                    chats.getChats()
+                    setTimeout(() =>chatsListBody(), 500)
             }else {
                 console.log(`Чат: ${title} не удалён`)
             }
@@ -83,18 +86,14 @@ function chatsListBody() {
 
                 setTimeout(()=>{let chatName = <HTMLElement>document.querySelector(".chat_name")
                 
-                chatName.innerHTML += `Chat: ${Store.getState().chats.message[i].title}`}, 1000)
+                chatName.innerHTML += `Chat: ${Store.getState().chats.message[i].title}`}, 500)
 
                 
                 if(Store.getState().currentChat !== "" || Store.getState().currentChat !== undefined) {
                     Store.set("current", chatId);
                 }
                
-                chat.getToken(chatId)
-                
-                chat.getToken(chatId)
-
-                
+                chat.getToken(chatId) 
                
             setTimeout(()=>{
                 

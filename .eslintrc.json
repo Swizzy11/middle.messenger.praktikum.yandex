@@ -1,4 +1,7 @@
-{
+{   
+    "extends": [
+        "stylelint-config-prettier"
+        ],
     "rules" : {
         "no-unused-vars": 2,
         "max-len": [1, 100],

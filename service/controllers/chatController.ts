@@ -1,6 +1,6 @@
 import API, { ChatAPI, IChat} from "../chatAPI";
-import Router from "../../src/utils/router.js"
-import store from "../store"
+import Router from "../../src/core/router"
+import store from "../../src/core/store"
 
 
 
@@ -43,9 +43,11 @@ export class ChatConroller {
     }
 
 
-    async deleteChatByID(id:number){
+    async deleteChatByID(id:number) {
         try{
-            this.api.deleteChatByID(id)
+          let chat = await this.api.deleteChatByID(id)
+          console.log(chat)
+          store.set("deleteChat", chat)
         }
         catch(error) {
             console.log(error.message)

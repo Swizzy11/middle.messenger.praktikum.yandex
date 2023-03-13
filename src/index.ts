@@ -1,37 +1,27 @@
-import {render} from "./utils/renderDOM"
-
 import './style.scss'
-
-
-
-
-import UserProfile from "./pages/home/modules/userProfile"
-import Login from "./pages/home/modules/login"
-import Registration from "./pages/home/modules/registration"
+import UserProfile from "./pages/userProfile"
+import Login from "./pages/login"
+import Registration from "./pages/registration"
 import MainPage from "./pages/home"
-import EditProfile from "./pages/home/modules/editProfile"
-import Error404 from "./pages/home/modules/error404"
-import Error500 from "./pages/home/modules/error500"
-
-import Router from "./utils/router"
-
-
-import Index from "./layout"
-import Store from "../service/store"
+import EditProfile from "./pages/editProfile"
+import Error404 from "./pages/error404"
+import Error500 from "./pages/error500"
+import Router from "./core/router"
+import Index from "./components/layout"
 import addValue from "./utils/heplerApp/addValue"
-import ChatConroller from "../service/controllers/chatController"
+
 
 
 
 if (performance.navigation.type === 1) {  
         setTimeout(()=>{
                 if(window.location.pathname === "/settings"){
-                        addValue()
+                        addValue();
                 }
         },150 );
         
 }
-const router = new Router("#root")
+const router = new Router("#root");
 router
         .use("/messanger",Index, "div", {
                 content: new MainPage("div")})
@@ -60,53 +50,3 @@ router
                 router.go("/login")
         }     
         
-
-const homeBtn = document.getElementById('homeBtn')
-homeBtn?.addEventListener("click", function(){
-        router.go("/messanger")
-        
-})
-
-const edit_Profile = document.getElementById('edit_Profile')
-    edit_Profile?.addEventListener("click", function(){
-        router.go("/settings")
-        
-})
-
-const profile = document.getElementById('profile')
-profile?.addEventListener("click", function(){
-        router.go("/profile")
-        
-})
-
-const loginIn = document.getElementById('loginIn')
-loginIn?.addEventListener("click", function(){
-        router.go("/")
-
-})
-
-const reg = document.getElementById('reg')
-reg?.addEventListener("click", function(){
-        router.go("/registration")
-
-})
-
-const err404 = document.getElementById('error_404')
-err404?.addEventListener("click", function(){
-        router.go("/error404")
- 
-})
-
-const err500 = document.getElementById('error_500')
-err500?.addEventListener("click", function(){
-        router.go("/error500")
-
-})
-
-
-
-// if(window.location.pathname === "/messanger") {
-//         const scrollChat:any = document.querySelector(".chat");
-//         scrollChat.scrollTop = scrollChat.scrollHeight
-// }
-

@@ -2,13 +2,13 @@ import { UnderlineName } from "../../components/underlineName";
 import Button from "../../components/buttonSendInfo/Button";
 import validator from "../../utils/validator";
 import { Input } from "../../components/input";
-import Router from "../../utils/router"
+import Router from "../../core/router"
 import AutheficationController from "../../../service/controllers/authController";
 
 import mainPage from "./mainPage";
 
-import { Connect } from "../../../service/store";
-import Store from "../../../service/store";
+import { Connect } from "../../core/store";
+import Store from "../../core/store";
 import { buttonAdd } from "../../components/buttonAdd";
 import ChatConroller from "../../../service/controllers/chatController";
 
@@ -25,27 +25,27 @@ const router = new Router("#root")
 export default Connect(
         mainPage,
         (state) => {
-
+                let user = Store.getState().user
                 if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 800)} 
-
+                if( user !== undefined) {
                 const chat = new ChatConroller()
                 
-                if(Store.getState().user !== undefined) {const userId = Store.getState().user.id;}
+                if(user !== undefined) {const userId = user.id;}
 
                 let avatarlink;
-                if(Store.getState().user.avatar !== "null") {
-                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${Store.getState().user.avatar}`
+                if(user.avatar !== "null" && user !== undefined ) {
+                        avatarlink = `https://ya-praktikum.tech/api/v2/resources/${user.avatar}`
                   }else {
                         avatarlink = ""
                   }
                 if(Store.getState().chats !== undefined) {
 
-                        const userId:any = Store.getState().user.id
+                        const userId:any = user.id
 
                         return {
                                 avatar: `<img class="user_photo_chat" src="${avatarlink}">`,
                                 userName: new UnderlineName({
-                                       text: `${Store.getState().user.first_name} ${Store.getState().user.second_name}`
+                                       text: `${user.first_name} ${user.second_name}`
                                 }),
                                 buttonProfile: new Button({
                                         className: "btn_profile",
@@ -85,19 +85,6 @@ export default Connect(
                                                 }
                                         }
                                     }),
-                                    
-                                buttonrefreshChat: new Button({
-                                className: "btn_logout",
-                                child: "обновить чаты",
-                                events:{
-                                        click: (e:Event) => {
-                                                e.preventDefault();
-                                                const chats = new ChatConroller()
-                                                chats.getChats()
-                                                setTimeout( ()=>{chatsListBody()}, 500)
-                                        }
-                                }
-                                }),
                                 buttonSend: new Button({
                                         className: "btn btn_send",
                                         child: ``,
@@ -180,7 +167,8 @@ export default Connect(
                                                            title: nameChatInfo
                                                           })
                                       
-                                                           setTimeout(()=> {chats.getChats()}, 50)
+                                                                setTimeout(()=>chats.getChats(),500)
+                                                                setTimeout(()=>chatsListBody(), 1000)
                                                   }
                                                 }
                                               }),
@@ -226,7 +214,7 @@ export default Connect(
                                                 className: 'btn btn_add',
                                                 child: "Add",
                                                 events: {
-                                                  click: (e:Event) => {
+                                                  click: async (e:Event) => {
                                                     e.preventDefault()
                                                         const nameChatInput = document.querySelectorAll(".add_chat_user")
                                                         let userId;
@@ -241,7 +229,7 @@ export default Connect(
                                                         const chats = new ChatConroller();
                                                         chats.addUserToChat({users: [userId], chatId: chatId})
                                       
-                                                        setTimeout(()=> {chats.getChats()}, 50)
+                                                        await chats.getChats()
                                                   }
                                                 }
                                               }),
@@ -336,5 +324,5 @@ export default Connect(
                         }}
                 
         }
-
+        }
 )

@@ -1,5 +1,5 @@
 import tpl from "./tpl";
-import Block from "../../core/Block";
+import { Component } from "../../core/Component";
 
 export interface IInput {
   type: string;
@@ -11,7 +11,7 @@ export interface IInput {
 }
 }
 
-export default class Input extends Block {
+export default class Input extends Component {
     constructor(props:IInput) {
       super("div", props);
     }

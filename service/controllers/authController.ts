@@ -1,7 +1,7 @@
 import API,{ AuthAPI } from "../authAPI"
 import {Signin, Signup} from "../interfaceAPI"
-import Router from "../../src/utils/router.js"
-import store from "../store"
+import Router from "../../src/core/router"
+import store from "../../src/core/store"
 
 const router = new Router("#root")
 export class AutheficationController {
@@ -16,7 +16,6 @@ export class AutheficationController {
 
             if(response === "OK" ) {
                 const userInfo = await this.api.userInfo();
-                console.log(userInfo)
                 store.set("user", userInfo)
                 router.go("/messanger");
         
@@ -24,12 +23,8 @@ export class AutheficationController {
                 const error:any =  document.querySelector(".error_password");
                 const userInfo = await this.api.userInfo();
                 store.set("user", userInfo)
-                console.log(store.getState())
-                setTimeout(()=>{
                     error.innerHTML = ""
                     router.go("/messanger"); 
-                    }, 800)
-    
                 return;
                 
             }
