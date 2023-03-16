@@ -9,6 +9,7 @@ import Error500 from "./pages/error500"
 import Router from "./core/router"
 import Index from "./components/layout"
 import addValue from "./utils/heplerApp/addValue"
+import Store from './core/store'
 
 
 
@@ -21,6 +22,7 @@ if (performance.navigation.type === 1) {
         },150 );
         
 }
+
 const router = new Router("#root");
 router
         .use("/messanger",Index, "div", {

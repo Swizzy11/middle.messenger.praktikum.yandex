@@ -245,7 +245,7 @@ div .btn_close {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 8%;
+    height: 10%;
     margin-top: 10px;
 }
 
@@ -253,9 +253,8 @@ div .btn_close {
 .feed_block__header-button {
     display: flex;
     justify-content: space-between;
-    margin-left: 10%;
+
     height: 40%;
-    margin-bottom: 10%;
 }
 
 .btn_profile {
@@ -275,12 +274,14 @@ div .btn_close {
 }
 .search_chat {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    flex-direction: column;
     width: 100%;   
 }
 
+.search_chat form {
+    margin-left: 5px;
+}
 .myBtn {
     background-color: #ffa33ac7;
     color: white;
@@ -293,7 +294,6 @@ div .btn_close {
   }
 .myBtn_delete {
     background-color: #ffa33a;
-    
     font-weight: bold;
     font-size: small;
     border: none;
@@ -302,8 +302,7 @@ div .btn_close {
 }
 
 .myBtn_delete:hover {
-    background-color: red;
-    border: 1px solid black;
+    background-color: rgba(255, 0, 0, 0.781);
     transition: 1s;
 }
   
@@ -412,9 +411,8 @@ div .btn_close {
     background-color: $primary-color;
 }
 .feed_body {
-    height: 70%;
+    height: 90%;
     width: 100%;
-    margin-top: 5%;
     overflow-y:scroll;
     scrollbar-width: thin;
     scrollbar-color: hsl(0 0% 50%);
@@ -494,9 +492,9 @@ div .btn_close {
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
     animation: ani 1s forwards;
-    --c: #ffa33a98; /* the border color */
-                --b: 10px;    /* the border thickness*/
-                --g: 5px;     /* the gap on hover */
+    --c: #ffa33a98; 
+                --b: 6px;    
+                --g: 2px;     
   
                 padding: calc(var(--g) + var(--b));
                 --_g: #0000 25%,var(--c) 0;
@@ -509,8 +507,7 @@ div .btn_close {
 }
 
 .block_edit_profile:hover {
-    width: 73vw;
-    height: 94vh;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     --_i: 100%;
     transition: .3s, background-size .3s .3s;
 }
@@ -634,9 +631,9 @@ div .btn_close {
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
     animation: ani 1s forwards;
-                --c: #ffa33a98; /* the border color */
-                --b: 10px;    /* the border thickness*/
-                --g: 5px;     /* the gap on hover */
+                --c: #ffa33a98; 
+                --b: 6px;    
+                --g: 2px;     
   
                 padding: calc(var(--g) + var(--b));
                 --_g: #0000 25%,var(--c) 0;
@@ -649,10 +646,9 @@ div .btn_close {
 }
 
 .block_profile:hover {
-    width: 46vw;
-    height: 92vh;
-        --_i: 100%;
-        transition: .3s, background-size .3s .3s;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    --_i: 100%;
+    transition: .3s, background-size .3s .3s;
 }
 
 .form {
@@ -729,9 +725,9 @@ div .btn_close {
     border: 1px solid rgba(92, 92, 92, 0.3);
     border-radius: 1em;
     animation: ani 1s forwards;
-                --c: #ffa33a98; /* the border color */
-                --b: 10px;    /* the border thickness*/
-                --g: 5px;     /* the gap on hover */
+                --c: #ffa33a98; 
+                --b: 6px;    
+                --g: 2px;     
   
                 padding: calc(var(--g) + var(--b));
                 --_g: #0000 25%,var(--c) 0;

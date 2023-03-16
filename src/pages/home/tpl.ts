@@ -28,9 +28,6 @@ const tpl =
     </div>
    <div class="search_chat">
        <form action="" method="post" target="_blank" > 
-                {{{inputSearch}}}   
-       </form>
-       <form action="" method="post" target="_blank" > 
                 {{{addChat}}}   
        </form>
        <form action="" method="post" target="_blank" > 

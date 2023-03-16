@@ -21,7 +21,7 @@ export class ChatAPI extends BaseAPI {
         })
     }
 
-    async getChats(): Promise<Chat[]> {
+    async getChats(): Promise<undefined> {
         return http.get("")
     }
 
