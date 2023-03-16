@@ -52,17 +52,17 @@ export default Connect(
                                                 child: "Изменить",
                                         }),
                                         events: {
-                                                submit: (e:Event) => {
+                                                submit: async (e:Event) => {
                                                         e.preventDefault()
                                                         const userForm = <HTMLFormElement>document.getElementById("avatarUp")
                                                         const form = new FormData(userForm)
                                                         const editAvatar = new UserConroller()
                                                         editAvatar.updateAvatar(form);
                                                         const authController = new AutheficationController()
-                                                        setTimeout(()=>{
-                                                        authController.userInfoAvatar()
-                                                        , 500})
-                                                        setTimeout(()=>addValue(), 1000)  
+                                                        
+                                                        await authController.userInfoAvatar()
+                                                        
+                                                        addValue()
                                                 }
                                         }
                                 }),
@@ -141,7 +141,7 @@ export default Connect(
                                         child: "Сохранить",
                                         type: "button",
                                         events: {
-                                                click: (e:Event) => {
+                                                click: async (e:Event) => {
                                                         e.preventDefault();
                                                         const ediData:any = {};
         
@@ -160,9 +160,9 @@ export default Connect(
                                                                 })
                                                                 const editInfo = new UserConroller()
                                                                 
-                                                                setTimeout(()=>addValue(), 1000)
+                                                                addValue()
                                                                 
-                                                                editInfo.updateUserData(ediData)
+                                                                await editInfo.updateUserData(ediData)
                                                         }                    
                                         }
                                         }
@@ -174,7 +174,7 @@ export default Connect(
                                         events: {
                                                 click: () => {
                                                         router.go("/messanger");
-                                                        setTimeout(()=> chatsListBody(), 1000)
+                                                        setTimeout(()=> chatsListBody(), 10)
                                                 }
                                         }
                                 }),

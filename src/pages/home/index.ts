@@ -26,10 +26,12 @@ export default Connect(
         mainPage,
         (state) => {
                 let user = Store.getState().user
-                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {setTimeout(()=>chatsListBody(), 800)} 
+                if (performance.navigation.type === 1 && window.location.pathname === "/messanger") {
+                        if(Store.getState().chats !== undefined || Store.getState().chats !== "" || Store.getState().chats !==  null)
+                        setTimeout(()=>chatsListBody(), 10)
+                        } 
                 if( user !== undefined) {
-                const chat = new ChatConroller()
-                
+
                 if(user !== undefined) {const userId = user.id;}
 
                 let avatarlink;
@@ -133,12 +135,12 @@ export default Connect(
                                         placeholder: "Написать сообщение...",
                                     }),
                         
-                                inputSearch: new Input({
-                                        type: "text",
-                                        name: "message",
-                                        class: "input_search",
-                                        placeholder: "Название чата",
-                                    }),
+                                // inputSearch: new Input({
+                                //         type: "text",
+                                //         name: "message",
+                                //         class: "input_search",
+                                //         placeholder: "Название чата",
+                                //     }),
                                 addChat: new buttonAdd({
                                         modalID: "myModalChatAdd",
                                         buttonAddChat: new buttonAddChat({
@@ -157,18 +159,18 @@ export default Connect(
                                                 className: 'btn btn_add',
                                                 child: "Add",
                                                 events: {
-                                                  click: (e:Event) => {
+                                                  click: async(e:Event) => {
                                                     e.preventDefault()
                                                       const nameChatInput = <HTMLInputElement>document.querySelector(".add_chat_input")
                                                       const chats = new ChatConroller();
                                                       const nameChatInfo = nameChatInput.value
                                       
-                                                          chats.createChat({
+                                                        await  chats.createChat({
                                                            title: nameChatInfo
                                                           })
                                       
-                                                                setTimeout(()=>chats.getChats(),500)
-                                                                setTimeout(()=>chatsListBody(), 1000)
+                                                               await chats.getChats()
+                                                                chatsListBody()
                                                   }
                                                 }
                                               }),
@@ -199,7 +201,7 @@ export default Connect(
                                 addUserToChat: new buttonAdd({
                                         modalID:"myModalUserAdd",
                                         buttonAddChat: new buttonAddChat({
-                                                child: "Добавить пользователя в чат",
+                                                child: "Войти в чат",
                                                 class: "myBtn",
                                                 events: {
                                                   click: (e:Event) => {
@@ -209,7 +211,7 @@ export default Connect(
                                                   }
                                                 }
                                               }),
-                                        modalName: "Напишите id пользователя",
+                                        modalName: "Напишите id чата",
                                         inputSend: new buttonSendInfo({
                                                 className: 'btn btn_add',
                                                 child: "Add",
@@ -217,13 +219,11 @@ export default Connect(
                                                   click: async (e:Event) => {
                                                     e.preventDefault()
                                                         const nameChatInput = document.querySelectorAll(".add_chat_user")
-                                                        let userId;
+                                                        let userId = user.id;
                                                         let chatId;
                                                         nameChatInput.forEach((e:HTMLInputElement, count:number = 0)=> {
                                                                 if(count === 0) {
                                                                         chatId = Number(e.value);
-                                                                }else{
-                                                                        userId = Number(e.value);
                                                                 }
                                                       })
                                                         const chats = new ChatConroller();
@@ -252,20 +252,15 @@ export default Connect(
                                                 }
                                               }),
                                         chatID: "ChatID:",
-                                        userID: "UserID:",
                                         inputChatID: new Input({
                                                 class: "input_common add_chat_user",
-                                                type: "text",
-                                        }),
-                                        inputUserID: new Input({
-                                                class:"input_common add_chat_user",
                                                 type: "text",
                                         }),
                                 }),
                                 deleteUserToChat: new buttonAdd({
                                         modalID:"myModalUserDelete",
                                         buttonAddChat: new buttonAddChat({
-                                                child: "Удалить пользователя из чат",
+                                                child: "Выйти из чата",
                                                 class: "myBtn_delete",
                                                 events: {
                                                   click: (e:Event) => {
@@ -275,27 +270,25 @@ export default Connect(
                                                   }
                                                 }
                                               }),
-                                        modalName: "Напишите id пользователя",
+                                        modalName: "Напишите id чата",
                                         inputSend: new buttonSendInfo({
                                                 className: 'btn btn_delete',
                                                 child: "DELETE",
                                                 events: {
-                                                  click: (e:Event) => {
+                                                  click: async (e:Event) => {
                                                     e.preventDefault()
                                                         const nameChatInput = document.querySelectorAll(".delete_chat_user")
-                                                        let userId;
+                                                        let userId = user.id;
                                                         let chatId;
                                                         nameChatInput.forEach((e:HTMLInputElement, count:number = 0)=> {
                                                                 if(count === 0) {
                                                                         chatId = Number(e.value);
-                                                                }else{
-                                                                        userId = Number(e.value);
                                                                 }
                                                       })
                                                         const chats = new ChatConroller();
-                                                        chats.deleteUserToChat({users: [userId], chatId: chatId})
+                                                        await chats.deleteUserToChat({users: [userId], chatId: chatId})
                                       
-                                                        setTimeout(()=> {chats.getChats()}, 50)
+                                                        await chats.getChats()
                                                   }
                                                 }
                                               }),
@@ -311,13 +304,8 @@ export default Connect(
                                                 }
                                               }),
                                         chatID: "ChatID:",
-                                        userID: "UserID:",
                                         inputChatID: new Input({
                                                 class: "input_common delete_chat_user",
-                                                type: "text",
-                                        }),
-                                        inputUserID: new Input({
-                                                class:"input_common delete_chat_user",
                                                 type: "text",
                                         }),
                                 }),

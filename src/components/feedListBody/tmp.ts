@@ -22,7 +22,7 @@ function chatsListBody() {
         let socket;
 
     for(let i = 0; i < lengthChats; i++) {
-        
+        const chatId:any = Store.getState().chats.message[i].id;
         let lastMessage;
 
         if(Store.getState().chats.message[i].last_message === null) {
@@ -49,7 +49,7 @@ function chatsListBody() {
 
         let message_you = document.createElement("div");
         message_you.className = "message_you"
-        message_you.textContent = lastMessage
+        message_you.textContent = `[ChatID: ${chatId}] ${lastMessage}  `
 
         let delete_chat = document.createElement("div")
         delete_chat.className = "delete_chat"
@@ -65,24 +65,25 @@ function chatsListBody() {
 
         delete_chat.addEventListener("click", async ()=>{
             let confirm_message = confirm(`Удалить чат ${title}?`)
-            const chatId:any = Store.getState().chats.message[i].id;
+            
 
             if(confirm_message === true) {
 
                     await chat.deleteChatByID(chatId)
                     console.log(`Чат: ${title} ID:${chatId} удалён`);
-                    const chats = new ChatConroller()
-                    chats.getChats()
-                    setTimeout(() =>chatsListBody(), 500)
+
+                    
+                    await chat.getChats()
+                    chatsListBody()
+
             }else {
                 console.log(`Чат: ${title} не удалён`)
             }
         })
 
 
-        name_people.addEventListener("click", ()=> {
+        name_people.addEventListener("click", async ()=> {
                 const chatId:any = Store.getState().chats.message[i].id;
-                const currentChat:any = Store.getState().chats.message[i];
 
                 setTimeout(()=>{let chatName = <HTMLElement>document.querySelector(".chat_name")
                 
@@ -93,9 +94,9 @@ function chatsListBody() {
                     Store.set("current", chatId);
                 }
                
-                chat.getToken(chatId) 
+                await chat.getToken(chatId) 
                
-            setTimeout(()=>{
+            
                 
                 token = Store.getState().tokenSet.token;
                 socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${token}`);
@@ -177,9 +178,7 @@ function chatsListBody() {
                         });
                             
                
-                },
-                            
-            100)
+            
 
         })
 

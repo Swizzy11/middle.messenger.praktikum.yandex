@@ -16,9 +16,9 @@ export default Connect(
                                 className:"btn_404",
                                 child: "Вернуться на главную?",
                                 events: {
-                                        click: () => {
+                                        click: async () => {
                                                 const logout = new AutheficationController();
-                                                logout.logout();
+                                                await logout.logout();
                                                 router.go("/login");
                                         }
                                 }
